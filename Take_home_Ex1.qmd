@@ -1,0 +1,383 @@
+---
+title: "Take home Exercise 1"
+author: "WYZ"
+---
+
+# **Take-home Exercise 1**
+
+# **Creating data visualisation beyond default**
+
+## **Setting the Scene**
+
+OECD education director Andreas Schleicher shared in a BBC article that "Singapore managed to achieve excellence without wide differences between children from wealthy and disadvantaged families." (2016) Furthermore, several Singapore's Minister for Education also started an "every school a good school" slogan. The general public, however, strongly belief that there are still disparities that exist, especially between the elite schools and neighborhood school, between students from families with higher socioeconomic status and those with relatively lower socioeconomic status and immigration and non-immigration families.
+
+## **The Data**
+
+The [PISA 2022 database](https://www.oecd.org/pisa/data/2022database/) contains the full set of responses from individual students, school principals and parents. There are a total of five data files and their contents are as follows:
+
+-   Student questionnaire data file
+
+-   School questionnaire data file
+
+-   Teacher questionnaire data file
+
+-   Cognitive item data file
+
+-   Questionnaire timing data file
+
+These data files are in SAS and SPSS formats. For the purpose of this assignment, you are required to use the **Student questionnaire data file** only. However, you are encouraged to download the other files for future needs.
+
+## **Project Objectives**
+
+The project will provide valuable insights into the educational achievements of Singapore students as measured by PISA 2022, contributing to the ongoing discourse on educational equity and quality in Singapore. This analysis will be of interest to educational policymakers, researchers, and the general public, offering a data-driven perspective on the effectiveness of current educational strategies and policies.
+
+# **2.Set Up**
+
+## **2.1 Load the relevant packages into the R environment**
+
+We use the `pacman::p_load()` function to load the required R packages into our working environment. The loaded packages are:
+
+-   **plotly**: For creating interactive web-based graphs.
+
+-   **ggthemes**: Provides additional themes for **ggplot2**
+
+-   **tidyverse**: A collection of core packages designed for data science, used extensively for data preparation and wrangling.
+
+```{r}
+#Load packages
+pacman::p_load(tidyverse,haven,dplyr,plotly,ggrepel, patchwork, 
+               ggthemes, hrbrthemes, ggplot2, haven)
+```
+
+## **2.2 Import the data-sets**
+
+The database comprises five key data files, each serving a unique purpose:
+
+-   **Student Questionnaire Data File:**
+
+    -   This file contains responses from students, providing insights into their backgrounds, attitudes, and experiences in education. Key areas include demographic information, learning habits, and perceptions of their educational environment.
+
+    -   **Primary Source for Analysis:** For the current project, this file will be the main focus, offering direct insights into student performance and personal backgrounds.
+
+## **2.3 Summary Statistics of cy08msp_stu_qqq.sas7bdat**
+
+```{r}
+stuqqq <- read_sas("THE1/data/cy08msp_stu_qqq.sas7bdat")
+```
+
+```{r}
+stuqqq_SG <- stuqqq %>%
+  filter(CNT == "SGP")
+```
+
+```{r}
+write_rds(stuqqq_SG,
+          "THE1/data/stuqqq_SG.rds")
+```
+
+```{r}
+stuqqq_SG <-
+  read_rds("THE1/data/stuqqq_SG.rds")
+```
+
+**Checking the structure of demo_data using `str()`:**
+
+```{r}
+str(stuqqq_SG)
+```
+
+There are a total of 6,606 rows and 1,279 variables. The output reveals that variables **`CNTRYID`**, **`CNTSCHID`**, **`CNTSTUID`**, **`REGION`**, **`OECD`**, **`ADMINMODE`**, **`LANGTEST_QQQ`**, **`LANGTEST_COG`**, **`LANGTEST_PAQ`**, **`Option_CT`**, **`Option_FL`**, **`Option_ICTQ`**, **`Option_WBQ`**, **`Option_PQ`**, **`Option_TQ`**, **`Option_UH`**, **`BOOKID`**, **`ST004D01T`**, **`ST019AQ01T`**, **`ST019BQ01T`**, and **`ST019CQ01T`** have been read as numeric, continuous data types, but should be analyzed as nominal data instead.
+
+**Checking for duplicates:**
+
+```{r}
+stuqqq_SG[duplicated(stuqqq_SG),]
+```
+
+From the output, there are no duplicated rows found in *stuqqq_SG*
+
+**Checking for missing values:**
+
+```{r}
+sum(is.na(stuqqq_SG))
+```
+
+From the output, there are zero missing values across all columns in **stuqqq_SG**
+
+```{r}
+ggplot(data=stuqqq_SG, aes(x = PV1MATH)) +
+  geom_histogram(bins=10, 
+                 boundary = 100,
+                 color="black", 
+                 fill="grey") +
+  ggtitle("Distribution of Maths scores")
+```
+
+**Changing Data Types:**
+
+```{r}
+# Create a new dataset PV by extracting relevant variables from stu_qqq_SG
+PV <- stuqqq_SG %>%
+  mutate(
+    Math_Score = rowMeans(select(., starts_with("PV1MATH"), starts_with("PV2MATH"), starts_with("PV3MATH"), starts_with("PV4MATH"), starts_with("PV5MATH"), starts_with("PV6MATH"), starts_with("PV7MATH"), starts_with("PV8MATH"), starts_with("PV9MATH"), starts_with("PV10MATH")), na.rm = TRUE),
+    Reading_Score = rowMeans(select(., starts_with("PV1READ"), starts_with("PV2READ"), starts_with("PV3READ"), starts_with("PV4READ"), starts_with("PV5READ"), starts_with("PV6READ"), starts_with("PV7READ"), starts_with("PV8READ"), starts_with("PV9READ"), starts_with("PV10READ")), na.rm = TRUE),
+    Science_Score = rowMeans(select(., starts_with("PV1SCIE"), starts_with("PV2SCIE"), starts_with("PV3SCIE"), starts_with("PV4SCIE"), starts_with("PV5SCIE"), starts_with("PV6SCIE"), starts_with("PV7SCIE"), starts_with("PV8SCIE"), starts_with("PV9SCIE"), starts_with("PV10SCIE")), na.rm = TRUE),
+    Total_Score = Math_Score + Reading_Score + Science_Score,
+    Gender = ifelse(ST004D01T == 1,  "Female", "Male"),
+    A_computer = ifelse(ST250Q02JA == 1, "Yes" , "No"),
+    mi_num = ST251Q06JA
+  ) %>%
+  select(CNTSCHID, CNTSTUID, Math_Score, Reading_Score, Science_Score, Total_Score, Gender, A_computer, mi_num)
+```
+
+**check the dataset using *"str":***
+
+```{r}
+str(PV)
+```
+
+**converts school ID and student ID from numeric values to characters:**
+
+```{r}
+PV$CNTSCHID <- as.character(PV$CNTSCHID)
+PV$CNTSCHID <- as.character(PV$CNTSTUID)
+```
+
+**Clear missing value:**
+
+```{r}
+PV <- na.omit(PV)
+```
+
+## **3 Exploratory Data Analysis**
+
+### **3.1 Distribution of Student Performance**
+
+```{r}
+plot1 <- ggplot(data = PV, aes(x = Math_Score)) +
+  geom_histogram(bins = 10, boundary = 100, color = "gray30", fill = "light blue") +
+  ggtitle("Distribution of Maths scores")+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+plot2 <- ggplot(data = PV, aes(x = Reading_Score)) +
+  geom_histogram(bins = 10, boundary = 100, color = "gray30", fill = "light blue") +
+  ggtitle("Distribution of Reading scores")+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+plot3 <- ggplot(data = PV, aes(x = Science_Score)) +
+  geom_histogram(bins = 10, boundary = 100, color = "gray30", fill = "light blue") +
+  ggtitle("Distribution of Science scores")+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+plot4 <- ggplot(data = PV, aes(x = Total_Score)) +
+  geom_histogram(bins = 10, boundary = 100, color = "gray30", fill = "light blue") +
+  ggtitle("Distribution of Total scores")+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+plot1 + plot2 + plot3 + plot4
+```
+
+### **3.2 Student Performance ------ Gender**
+
+The following code generates density plots to compare the distribution of academic performance between students of different genders, providing a comprehensive understanding of the gender differences in academic achievement.
+
+```{r}
+plot1 <- ggplot(data = PV, aes(x = Math_Score, fill = Gender)) +
+  geom_density(alpha = 0.7, position = "identity", stat = "density") +  
+   scale_fill_manual(values = c("Female" = "light pink", "Male" = "light blue")) +
+  labs(title = "Math Scores by Gender") +
+  theme(legend.position = "none") +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal() +
+  theme(text = element_text(size = 8), plot.title = element_text(hjust = 0.5))
+
+plot2 <- ggplot(data = PV, aes(x = Reading_Score, fill = Gender)) +
+  geom_density(alpha = 0.7, position = "identity", stat = "Density") +
+  scale_fill_manual(values = c("Female" = "light pink", "Male" = "light blue")) +
+  labs(title = "Reading Scores by Gender") +
+  theme(legend.position = "none") +
+  scale_y_continuous(labels = scales::percent)+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+plot3 <- ggplot(data = PV, aes(x = Science_Score, fill = Gender)) +
+  geom_density(alpha = 0.7, position = "identity", stat = "Density") +
+  scale_fill_manual(values = c("Female" = "light pink", "Male" = "light blue")) +
+  labs(title = "Science Scores by Gender") +
+  theme(legend.position = "none") +
+  scale_y_continuous(labels = scales::percent)+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+plot4 <- ggplot(data = PV, aes(x = Total_Score, fill = Gender)) +
+  geom_density(alpha = 0.7, position = "identity", stat = "density") +
+  scale_fill_manual(values = c("Female" = "light pink", "Male" = "light blue")) +
+  labs(title = "Total Scores by Gender") + 
+  scale_y_continuous(labels = scales::percent)+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+combined_plots <- plot1 + plot2 + plot3 + plot4 +
+  plot_layout(guides = "collect")
+
+combined_plots
+```
+
+### **3.3 Student Performance by School**
+
+The following code calculates the maths, reading, and science, as well as the average grades in these three subjects for each school's students, and synthesises a new dataset for graphing in the next step.
+
+```{r}
+
+School_Avg_Scores <- PV %>%
+  group_by(CNTSCHID) %>%
+  dplyr::summarize(
+    Avg_Math_Score = mean(Math_Score, na.rm = TRUE),
+    Avg_Reading_Score = mean(Reading_Score, na.rm = TRUE),
+    Avg_Science_Score = mean(Science_Score, na.rm = TRUE),
+    Avg_Score = mean(Total_Score/3, na.rm = TRUE)
+  )
+
+School_Avg_Scores_subjects <- School_Avg_Scores %>%
+  select(CNTSCHID, starts_with("Avg_"))
+
+School_Avg_Scores_long <- School_Avg_Scores_subjects %>%
+  pivot_longer(
+    cols = -CNTSCHID, 
+    names_to = "Subject", 
+    values_to = "Score"
+  )
+
+```
+
+The following code draws box plots showing the distribution of school average scores in each subject, with text labels identifying the four highest-scoring schools and the two lowest-scoring schools in each subject.
+
+```{r}
+outliers_data <- School_Avg_Scores %>%
+  pivot_longer(cols = starts_with("Avg_"), names_to = "Subject", values_to = "Score") %>%
+  group_by(Subject) %>%
+  arrange(Score) %>%
+  slice(c(1:2, (n() - 3):(n())))
+
+ggplot(School_Avg_Scores_long, aes(x = Subject, y = Score, fill = Subject)) +
+  geom_boxplot(fill = "white") +
+  geom_text_repel(data = outliers_data, aes(label = CNTSCHID), 
+                  position = position_dodge(width = 1), 
+                  box.padding = 0.8, 
+                  force = 1, 
+                  segment.color = "gray", 
+                  size = 2) +  # Use ggrepel's geom_text_repel
+  labs(title = "Boxplot of Average Scores for Each Subject", x = "", y = "") +
+  theme_minimal() +
+  theme(text = element_text(size = 10),
+        plot.title = element_text(hjust = 0.5))
+```
+
+### **3.4 Student Performance by Computer**
+
+The following code plots box-and-line graphs to compare student performance in maths, reading, science and overall scores by whether or not they had a computer to themselves.
+
+```{r}
+p1 <- ggplot(data = PV, aes(x =Math_Score , y = A_computer)) +
+        geom_boxplot(fill = "light gray") +
+        labs(title ="Math Score by Computers",x = "", y = "")+
+        theme_minimal() +
+        theme(text = element_text(size = 8),
+              plot.title = element_text(hjust = 0.5))
+
+p2 <- ggplot(data = PV, aes(x =Reading_Score , y = A_computer)) +
+        geom_boxplot( fill = "light gray") +
+     
+        labs(title ="Reading Score by Computers", x = "", y = "")+
+        theme_minimal() +
+        theme(text = element_text(size = 8),
+              plot.title = element_text(hjust = 0.5))
+  
+p3 <- ggplot(data = PV, aes(x = Science_Score , y = A_computer)) +
+        geom_boxplot( fill = "light gray") +
+       
+        labs(title ="Science Score by Computers", x = "", y = "")+
+        theme_minimal() +
+        theme(text = element_text(size = 8),
+              plot.title = element_text(hjust = 0.5))  
+
+p4 <- ggplot(data = PV, aes(x = Total_Score , y = A_computer)) +
+        geom_boxplot( fill = "light gray") +
+       
+        labs(title ="Total Score by Computers", x = "", y = "")+
+        theme_minimal() +
+        theme(text = element_text(size = 8),
+              plot.title = element_text(hjust = 0.5))
+
+
+combined_plot<- p1 + p2 + p3 + p4
+combined_plot
+```
+
+### **3.5 Student Performance by Musical Instruments**
+
+The following code shows scatter plots of students\' maths, reading, science and overall performance against the number of musical instruments owned, as well as showing the relationship by fitting a line through linear regression.
+
+```{r}
+plot_math <- ggplot(data=PV, aes(x=mi_num, y=Math_Score)) +
+  geom_point(color="gray") +
+  geom_smooth(method=lm, size=0.5,color = "red") +
+  labs(title ="Math Score by Musical instruments", x = "", y = "")+
+    theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+
+plot_reading <- ggplot(data=PV, aes(x=mi_num, y=Reading_Score)) +
+  geom_point(color="gray") +
+  geom_smooth(method=lm, size=0.5,color = "red") +
+  labs(title ="Reading Score by Musical instruments", x = "", y = "")+
+    theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+
+plot_science <- ggplot(data=PV, aes(x=mi_num, y=Science_Score)) +
+  geom_point(color="gray") +
+  geom_smooth(method=lm, size=0.5,color = "red") +
+  labs(title ="Science Score by Musical instruments", x = "", y = "")+
+    theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+
+plot_total <- ggplot(data=PV, aes(x=mi_num, y=Total_Score)) +
+  geom_point(color="gray") +
+  geom_smooth(method=lm, size=0.5,color = "red") +
+  labs(title ="Total Score by Musical instruments", x = "", y = "")+
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
+
+
+combined_plot <- plot_math + plot_reading + plot_science + plot_total
+combined_plot
+```
+
+## **4 Conclusion**
+
+-   The distribution of students\' performance across subjects is right-skewed , indicating that the majority of students tend to have scores clustered towards the higher end of the scale, with a tail extending towards the lower scores.
+
+-   Gender differences were observed, with males slightly excelling in mathematics, while females performed better in reading.
+
+-   School-level analysis showcased a wide performance variation, with some excelling in specific subjects.
+
+-   the visual analysis suggests a possible advantage in academic performance for students who have computers, but more rigorous statistical analysis would be necessary to establish causality and understand the underlying factors contributing to this trend.
+
+-   Socioeconomic factors like musical instruments influence scores positively. Students with more instruments tended to perform better, and those with private rooms consistently outperformed peers without.

@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="WYZ">
+
+<title>ISSS624 - Take home Exercise 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISSS624</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Hands-on Exercises</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercises">    
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex1.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex2.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="./In_class_Ex1.html" rel="" target="">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./In_class_Ex2.html" rel="" target="">
+ <span class="dropdown-text">In-class Exercise 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="./Take_home_Ex1.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="dropdown-header">
+ <span class="menu-text">about.qmd</span></li>
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#take-home-exercise-1" id="toc-take-home-exercise-1" class="nav-link active" data-scroll-target="#take-home-exercise-1"><strong>Take-home Exercise 1</strong></a></li>
+  <li><a href="#creating-data-visualisation-beyond-default" id="toc-creating-data-visualisation-beyond-default" class="nav-link" data-scroll-target="#creating-data-visualisation-beyond-default"><strong>Creating data visualisation beyond default</strong></a>
+  <ul class="collapse">
+  <li><a href="#setting-the-scene" id="toc-setting-the-scene" class="nav-link" data-scroll-target="#setting-the-scene"><strong>Setting the Scene</strong></a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>The Data</strong></a></li>
+  <li><a href="#project-objectives" id="toc-project-objectives" class="nav-link" data-scroll-target="#project-objectives"><strong>Project Objectives</strong></a></li>
+  </ul></li>
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up"><strong>2.Set Up</strong></a>
+  <ul class="collapse">
+  <li><a href="#load-the-relevant-packages-into-the-r-environment" id="toc-load-the-relevant-packages-into-the-r-environment" class="nav-link" data-scroll-target="#load-the-relevant-packages-into-the-r-environment"><strong>2.1 Load the relevant packages into the R environment</strong></a></li>
+  <li><a href="#import-the-data-sets" id="toc-import-the-data-sets" class="nav-link" data-scroll-target="#import-the-data-sets"><strong>2.2 Import the data-sets</strong></a></li>
+  <li><a href="#summary-statistics-of-cy08msp_stu_qqq.sas7bdat" id="toc-summary-statistics-of-cy08msp_stu_qqq.sas7bdat" class="nav-link" data-scroll-target="#summary-statistics-of-cy08msp_stu_qqq.sas7bdat"><strong>2.3 Summary Statistics of cy08msp_stu_qqq.sas7bdat</strong></a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><strong>3 Exploratory Data Analysis</strong></a>
+  <ul class="collapse">
+  <li><a href="#distribution-of-student-performance" id="toc-distribution-of-student-performance" class="nav-link" data-scroll-target="#distribution-of-student-performance"><strong>3.1 Distribution of Student Performance</strong></a></li>
+  <li><a href="#student-performance-gender" id="toc-student-performance-gender" class="nav-link" data-scroll-target="#student-performance-gender"><strong>3.2 Student Performance —— Gender</strong></a></li>
+  <li><a href="#student-performance-by-school" id="toc-student-performance-by-school" class="nav-link" data-scroll-target="#student-performance-by-school"><strong>3.3 Student Performance by School</strong></a></li>
+  <li><a href="#student-performance-by-computer" id="toc-student-performance-by-computer" class="nav-link" data-scroll-target="#student-performance-by-computer"><strong>3.4 Student Performance by Computer</strong></a></li>
+  <li><a href="#student-performance-by-musical-instruments" id="toc-student-performance-by-musical-instruments" class="nav-link" data-scroll-target="#student-performance-by-musical-instruments"><strong>3.5 Student Performance by Musical Instruments</strong></a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>4 Conclusion</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take home Exercise 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>WYZ </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="take-home-exercise-1" class="level1">
+<h1><strong>Take-home Exercise 1</strong></h1>
+</section>
+<section id="creating-data-visualisation-beyond-default" class="level1">
+<h1><strong>Creating data visualisation beyond default</strong></h1>
+<section id="setting-the-scene" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-scene"><strong>Setting the Scene</strong></h2>
+<p>OECD education director Andreas Schleicher shared in a BBC article that “Singapore managed to achieve excellence without wide differences between children from wealthy and disadvantaged families.” (2016) Furthermore, several Singapore’s Minister for Education also started an “every school a good school” slogan. The general public, however, strongly belief that there are still disparities that exist, especially between the elite schools and neighborhood school, between students from families with higher socioeconomic status and those with relatively lower socioeconomic status and immigration and non-immigration families.</p>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data"><strong>The Data</strong></h2>
+<p>The <a href="https://www.oecd.org/pisa/data/2022database/">PISA 2022 database</a> contains the full set of responses from individual students, school principals and parents. There are a total of five data files and their contents are as follows:</p>
+<ul>
+<li><p>Student questionnaire data file</p></li>
+<li><p>School questionnaire data file</p></li>
+<li><p>Teacher questionnaire data file</p></li>
+<li><p>Cognitive item data file</p></li>
+<li><p>Questionnaire timing data file</p></li>
+</ul>
+<p>These data files are in SAS and SPSS formats. For the purpose of this assignment, you are required to use the <strong>Student questionnaire data file</strong> only. However, you are encouraged to download the other files for future needs.</p>
+</section>
+<section id="project-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="project-objectives"><strong>Project Objectives</strong></h2>
+<p>The project will provide valuable insights into the educational achievements of Singapore students as measured by PISA 2022, contributing to the ongoing discourse on educational equity and quality in Singapore. This analysis will be of interest to educational policymakers, researchers, and the general public, offering a data-driven perspective on the effectiveness of current educational strategies and policies.</p>
+</section>
+</section>
+<section id="set-up" class="level1">
+<h1><strong>2.Set Up</strong></h1>
+<section id="load-the-relevant-packages-into-the-r-environment" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-relevant-packages-into-the-r-environment"><strong>2.1 Load the relevant packages into the R environment</strong></h2>
+<p>We use the <code>pacman::p_load()</code> function to load the required R packages into our working environment. The loaded packages are:</p>
+<ul>
+<li><p><strong>plotly</strong>: For creating interactive web-based graphs.</p></li>
+<li><p><strong>ggthemes</strong>: Provides additional themes for <strong>ggplot2</strong></p></li>
+<li><p><strong>tidyverse</strong>: A collection of core packages designed for data science, used extensively for data preparation and wrangling.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,haven,dplyr,plotly,ggrepel, patchwork, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               ggthemes, hrbrthemes, ggplot2, haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import-the-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="import-the-data-sets"><strong>2.2 Import the data-sets</strong></h2>
+<p>The database comprises five key data files, each serving a unique purpose:</p>
+<ul>
+<li><p><strong>Student Questionnaire Data File:</strong></p>
+<ul>
+<li><p>This file contains responses from students, providing insights into their backgrounds, attitudes, and experiences in education. Key areas include demographic information, learning habits, and perceptions of their educational environment.</p></li>
+<li><p><strong>Primary Source for Analysis:</strong> For the current project, this file will be the main focus, offering direct insights into student performance and personal backgrounds.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="summary-statistics-of-cy08msp_stu_qqq.sas7bdat" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics-of-cy08msp_stu_qqq.sas7bdat"><strong>2.3 Summary Statistics of cy08msp_stu_qqq.sas7bdat</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>stuqqq <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"THE1/data/cy08msp_stu_qqq.sas7bdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>stuqqq_SG <span class="ot">&lt;-</span> stuqqq <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CNT <span class="sc">==</span> <span class="st">"SGP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(stuqqq_SG,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"THE1/data/stuqqq_SG.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>stuqqq_SG <span class="ot">&lt;-</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_rds</span>(<span class="st">"THE1/data/stuqqq_SG.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Checking the structure of demo_data using&nbsp;<code>str()</code>:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(stuqqq_SG)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [6,606 × 1,279] (S3: tbl_df/tbl/data.frame)
+ $ CNT         : chr [1:6606] "SGP" "SGP" "SGP" "SGP" ...
+  ..- attr(*, "label")= chr "Country code 3-character"
+ $ CNTRYID     : num [1:6606] 702 702 702 702 702 702 702 702 702 702 ...
+  ..- attr(*, "label")= chr "Country Identifier"
+ $ CNTSCHID    : num [1:6606] 70200052 70200134 70200112 70200004 70200152 ...
+  ..- attr(*, "label")= chr "Intl. School ID"
+ $ CNTSTUID    : num [1:6606] 70200001 70200002 70200003 70200004 70200005 ...
+  ..- attr(*, "label")= chr "Intl. Student ID"
+ $ CYC         : chr [1:6606] "08MS" "08MS" "08MS" "08MS" ...
+  ..- attr(*, "label")= chr "PISA Assessment Cycle (2 digits + 2 character Assessment type - MS/FT)"
+ $ NatCen      : chr [1:6606] "070200" "070200" "070200" "070200" ...
+  ..- attr(*, "label")= chr "National Centre 6-digit Code"
+ $ STRATUM     : chr [1:6606] "SGP01" "SGP01" "SGP01" "SGP01" ...
+  ..- attr(*, "label")= chr "Stratum ID 5-character (cnt + original stratum ID)"
+ $ SUBNATIO    : chr [1:6606] "7020000" "7020000" "7020000" "7020000" ...
+  ..- attr(*, "label")= chr "Adjudicated sub-region code 7-digit code (3-digit country code + region ID + stratum ID)"
+ $ REGION      : num [1:6606] 70200 70200 70200 70200 70200 70200 70200 70200 70200 70200 ...
+  ..- attr(*, "label")= chr "REGION"
+ $ OECD        : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...
+  ..- attr(*, "label")= chr "OECD country"
+ $ ADMINMODE   : num [1:6606] 2 2 2 2 2 2 2 2 2 2 ...
+  ..- attr(*, "label")= chr "Mode of Respondent"
+ $ LANGTEST_QQQ: num [1:6606] 313 313 313 313 313 313 313 313 313 313 ...
+  ..- attr(*, "label")= chr "Language of Questionnaire"
+ $ LANGTEST_COG: num [1:6606] 313 313 313 313 313 313 313 313 313 313 ...
+  ..- attr(*, "label")= chr "Language of Assessment"
+ $ LANGTEST_PAQ: num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Language of Parent Questionnaire"
+ $ Option_CT   : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Creative Thinking Option"
+ $ Option_FL   : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Financial Literacy Option"
+ $ Option_ICTQ : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "ICT Questionnaire Option"
+ $ Option_WBQ  : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...
+  ..- attr(*, "label")= chr "Well-Being Questionnaire Option"
+ $ Option_PQ   : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...
+  ..- attr(*, "label")= chr "Parent Questionnaire Option"
+ $ Option_TQ   : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...
+  ..- attr(*, "label")= chr "Teacher Questionnaire Option"
+ $ Option_UH   : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...
+  ..- attr(*, "label")= chr "Une Heure Option"
+ $ BOOKID      : num [1:6606] 4 45 8 40 42 15 13 39 14 7 ...
+  ..- attr(*, "label")= chr "Form Identifier"
+ $ ST001D01T   : num [1:6606] 10 10 10 10 10 10 10 10 10 10 ...
+  ..- attr(*, "label")= chr "Student International Grade (Derived)"
+ $ ST003D02T   : num [1:6606] 10 6 7 2 9 9 3 4 8 6 ...
+  ..- attr(*, "label")= chr "Student (Standardized) Birth - Month"
+ $ ST003D03T   : num [1:6606] 2006 2006 2006 2006 2006 ...
+  ..- attr(*, "label")= chr "Student (Standardized) Birth -Year"
+ $ ST004D01T   : num [1:6606] 1 2 2 2 1 1 2 2 1 2 ...
+  ..- attr(*, "label")= chr "Student (Standardized) Gender"
+ $ ST250Q01JA  : num [1:6606] 2 1 1 2 2 2 1 1 2 2 ...
+  ..- attr(*, "label")= chr "Which of the following are in your [home]: A room of your own"
+ $ ST250Q02JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Which of the following are in your [home]: A computer (laptop, desktop, or tablet) that you can use for school work"
+ $ ST250Q03JA  : num [1:6606] 1 1 2 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Which of the following are in your [home]: Educational Software or Apps"
+ $ ST250Q04JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Which of the following are in your [home]: Your own [cell phone] with Internet access (e.g. smartphone)"
+ $ ST250Q05JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Which of the following are in your [home]: Internet access (e.g. Wi-fi) (excluding through smartphones)"
+ $ ST250D06JA  : chr [1:6606] "7020002" "7020001" "7020001" "7020002" ...
+  ..- attr(*, "label")= chr "Which of the following are in your home? &lt;Country-specific item 1&gt;"
+ $ ST250D07JA  : chr [1:6606] "7020002" "7020001" "7020002" "7020002" ...
+  ..- attr(*, "label")= chr "Which of the following are in your home? &lt;Country-specific item 2&gt;"
+ $ ST251Q01JA  : num [1:6606] 2 1 2 1 2 2 2 1 3 3 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Cars, vans, or trucks"
+ $ ST251Q02JA  : num [1:6606] 1 4 1 2 2 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Mopeds or motorcycles"
+ $ ST251Q03JA  : num [1:6606] 3 3 3 3 2 2 3 3 4 3 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Rooms with a bath or shower"
+ $ ST251Q04JA  : num [1:6606] 3 3 3 3 2 3 3 3 4 3 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Rooms with a [flush toilet]"
+ $ ST251Q06JA  : num [1:6606] 3 4 2 2 1 2 2 3 4 1 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Musical instruments (e.g. guitar, piano, [country-specific example])"
+ $ ST251Q07JA  : num [1:6606] 3 2 1 1 4 1 4 1 4 3 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Works of art (e.g. paintings, sculptures, [country-specific example])"
+ $ ST251D08JA  : chr [1:6606] "9999997" "9999997" "9999997" "9999997" ...
+  ..- attr(*, "label")= chr "How many of these items are there at your home? &lt;Country-specific item 1&gt;"
+ $ ST251D09JA  : chr [1:6606] "9999997" "9999997" "9999997" "9999997" ...
+  ..- attr(*, "label")= chr "How many of these items are there at your home? &lt;Country-specific item 2&gt;"
+ $ ST253Q01JA  : num [1:6606] 7 8 7 6 7 7 8 8 8 7 ...
+  ..- attr(*, "label")= chr "How many [digital devices] with screens are there in your [home]?"
+ $ ST254Q01JA  : num [1:6606] 2 3 2 2 2 2 2 2 2 2 ...
+  ..- attr(*, "label")= chr "How many of the following [digital devices] are in your [home]: Televisions"
+ $ ST254Q02JA  : num [1:6606] 1 2 2 1 3 2 2 5 2 2 ...
+  ..- attr(*, "label")= chr "How many of the following [digital devices] are in your [home]: Desktop computers"
+ $ ST254Q03JA  : num [1:6606] 3 2 2 2 2 2 3 3 3 4 ...
+  ..- attr(*, "label")= chr "How many of the following [digital devices] are in your [home]: Laptop computers or notebooks"
+ $ ST254Q04JA  : num [1:6606] 2 3 2 1 1 2 2 3 3 2 ...
+  ..- attr(*, "label")= chr "How many of the following [digital devices] are in your [home]: Tablets (e.g. [iPad®], [BlackBerry® Playbook™])"
+ $ ST254Q05JA  : num [1:6606] 1 5 1 1 NA 1 1 5 2 2 ...
+  ..- attr(*, "label")= chr "How many of the following [digital devices] are in your [home]: E-book readers (e.g. [Kindle™], [Kobo], [Bookeen])"
+ $ ST254Q06JA  : num [1:6606] 3 2 3 3 4 2 4 3 4 4 ...
+  ..- attr(*, "label")= chr "How many of the following [digital devices] are in your [home]: [Cell phones] with Internet access (i.e. smartphones)"
+ $ ST255Q01JA  : num [1:6606] 7 4 4 3 2 2 4 5 7 4 ...
+  ..- attr(*, "label")= chr "How many books are there in your [home]?"
+ $ ST256Q01JA  : num [1:6606] 2 4 5 2 4 1 1 3 4 4 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Religious books (e.g. [Bible], [Example 2])"
+ $ ST256Q02JA  : num [1:6606] 2 5 2 1 1 2 1 5 4 2 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Classical literature (e.g. [Shakespeare], [Example 2])"
+ $ ST256Q03JA  : num [1:6606] 4 5 2 1 1 2 2 5 5 1 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Contemporary literature"
+ $ ST256Q06JA  : num [1:6606] 4 3 3 2 2 5 2 4 4 1 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Books on science"
+ $ ST256Q07JA  : num [1:6606] 3 5 5 2 2 5 1 4 3 1 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Books on art, music, or design"
+ $ ST256Q08JA  : num [1:6606] 3 3 3 1 1 5 1 5 5 2 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: [Technical reference books]"
+ $ ST256Q09JA  : num [1:6606] 2 2 4 2 2 2 2 2 2 3 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Dictionaries"
+ $ ST256Q10JA  : num [1:6606] 4 4 5 2 4 1 4 4 4 3 ...
+  ..- attr(*, "label")= chr "How many of these books at [home]: Books to help with your school work"
+ $ ST230Q01JA  : num [1:6606] 4 4 2 4 4 3 2 2 3 4 ...
+  ..- attr(*, "label")= chr "How many siblings (including brothers, sisters, step-brothers, and step-sisters) do you have?"
+ $ ST005Q01JA  : num [1:6606] 2 2 2 2 2 2 2 2 2 2 ...
+  ..- attr(*, "label")= chr "What is the [highest level of schooling] completed by your mother?"
+ $ ST006Q01JA  : num [1:6606] 2 2 2 2 2 2 2 NA 2 2 ...
+  ..- attr(*, "label")= chr "Does your mother have any of the following qualifications: [ISCED level 8]"
+ $ ST006Q02JA  : num [1:6606] 2 2 2 2 2 2 2 1 2 2 ...
+  ..- attr(*, "label")= chr "Does your mother have any of the following qualifications: [ISCED level 7]"
+ $ ST006Q03JA  : num [1:6606] 1 2 2 2 2 2 2 1 1 1 ...
+  ..- attr(*, "label")= chr "Does your mother have any of the following qualifications: [ISCED level 6]"
+ $ ST006Q04JA  : num [1:6606] 2 1 2 2 1 1 2 1 1 2 ...
+  ..- attr(*, "label")= chr "Does your mother have any of the following qualifications: [ISCED level 5]"
+ $ ST006Q05JA  : num [1:6606] 1 1 2 1 2 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Does your mother have any of the following qualifications: [ISCED level 4]"
+ $ ST007Q01JA  : num [1:6606] 2 2 2 4 2 2 4 2 2 2 ...
+  ..- attr(*, "label")= chr "What is the [highest level of schooling] completed by your father?"
+ $ ST008Q01JA  : num [1:6606] 2 2 2 NA 2 2 2 NA 2 2 ...
+  ..- attr(*, "label")= chr "Does your father have any of the following qualifications: [ISCED level 8]"
+ $ ST008Q02JA  : num [1:6606] 2 2 2 NA 2 1 2 NA 2 2 ...
+  ..- attr(*, "label")= chr "Does your father have any of the following qualifications: [ISCED level 7]"
+ $ ST008Q03JA  : num [1:6606] 2 2 2 NA 2 1 2 1 1 2 ...
+  ..- attr(*, "label")= chr "Does your father have any of the following qualifications: [ISCED level 6]"
+ $ ST008Q04JA  : num [1:6606] 1 1 2 NA 1 1 2 1 1 1 ...
+  ..- attr(*, "label")= chr "Does your father have any of the following qualifications: [ISCED level 5]"
+ $ ST008Q05JA  : num [1:6606] 2 1 2 1 2 1 2 1 1 2 ...
+  ..- attr(*, "label")= chr "Does your father have any of the following qualifications: [ISCED level 4]"
+ $ ST258Q01JA  : num [1:6606] 1 1 1 5 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "In the past 30 days, how often did you not eat because there was not enough money to buy food?"
+ $ ST259Q01JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Now think about where you would place your family on this scale. Where would you say your family stands at this time?"
+ $ ST259Q02JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Now think about where you would place your family on this scale. Where do you think you will stand when you are 30?"
+ $ ST019AQ01T  : num [1:6606] 1 1 1 1 1 2 1 2 1 1 ...
+  ..- attr(*, "label")= chr "In what country were you and your parents born? You"
+ $ ST019BQ01T  : num [1:6606] 1 1 2 1 1 2 1 2 1 1 ...
+  ..- attr(*, "label")= chr "In what country were you and your parents born? Mother"
+ $ ST019CQ01T  : num [1:6606] 1 1 1 1 1 2 1 2 1 1 ...
+  ..- attr(*, "label")= chr "In what country were you and your parents born? Father"
+ $ ST021Q01TA  : num [1:6606] NA NA NA NA NA 1 NA 1 NA NA ...
+  ..- attr(*, "label")= chr "How old were you when you arrived in [country of test]?"
+ $ ST022Q01TA  : num [1:6606] 1 1 2 2 1 2 1 2 1 2 ...
+  ..- attr(*, "label")= chr "What language do you speak at home most of the time?"
+ $ ST226Q01JA  : num [1:6606] 1 1 1 1 1 1 1 4 1 1 ...
+  ..- attr(*, "label")= chr "How long have you been enrolled at this school?"
+ $ ST125Q01NA  : num [1:6606] 3 5 8 4 8 3 4 8 8 4 ...
+  ..- attr(*, "label")= chr "How old were you when you started [ISCED 0]: Years"
+ $ ST126Q01TA  : num [1:6606] 4 5 5 5 5 5 5 5 4 5 ...
+  ..- attr(*, "label")= chr "How old were you when you started [ISCED 1]: Years"
+ $ ST127Q01TA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Have you ever repeated a [grade]: At [ISCED 1]"
+ $ ST127Q02TA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Have you ever repeated a [grade]: At [ISCED 2]"
+ $ ST127Q03TA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Have you ever repeated a [grade]: At [ISCED 3]"
+ $ ST260Q01JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Have you ever missed school for more than three months in a row: At [ISCED 1]"
+ $ ST260Q02JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Have you ever missed school for more than three months in a row: At [ISCED 2]"
+ $ ST260Q03JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "Have you ever missed school for more than three months in a row: At [ISCED 3]"
+ $ ST261Q01JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I was bored."
+ $ ST261Q02JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I was suspended for something (e.g. violence, aggression, use of drugs, drug dealing)."
+ $ ST261Q03JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I was pregnant."
+ $ ST261Q04JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I could not reach school because of transportation problems."
+ $ ST261Q05JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I had to take care of a family member."
+ $ ST261Q06JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I had to help with work at home, the family business, or on the family land."
+ $ ST261Q07JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I had to get work to bring money home."
+ $ ST261Q08JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I was sick."
+ $ ST261Q09JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I did not feel safe at school."
+ $ ST261Q10JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: I could not pay [school fees]."
+ $ ST261Q11JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "label")= chr "Why miss school for 3+ months: School was closed because of a natural disaster (e.g. flood, earthquake)."
+ $ ST062Q01TA  : num [1:6606] 1 1 1 1 2 1 1 1 1 1 ...
+  ..- attr(*, "label")= chr "In the last two full weeks of school, how often: I [skipped] a whole school day"
+  [list output truncated]</code></pre>
+</div>
+</div>
+<p>There are a total of 6,606 rows and 1,279 variables. The output reveals that variables <strong><code>CNTRYID</code></strong>, <strong><code>CNTSCHID</code></strong>, <strong><code>CNTSTUID</code></strong>, <strong><code>REGION</code></strong>, <strong><code>OECD</code></strong>, <strong><code>ADMINMODE</code></strong>, <strong><code>LANGTEST_QQQ</code></strong>, <strong><code>LANGTEST_COG</code></strong>, <strong><code>LANGTEST_PAQ</code></strong>, <strong><code>Option_CT</code></strong>, <strong><code>Option_FL</code></strong>, <strong><code>Option_ICTQ</code></strong>, <strong><code>Option_WBQ</code></strong>, <strong><code>Option_PQ</code></strong>, <strong><code>Option_TQ</code></strong>, <strong><code>Option_UH</code></strong>, <strong><code>BOOKID</code></strong>, <strong><code>ST004D01T</code></strong>, <strong><code>ST019AQ01T</code></strong>, <strong><code>ST019BQ01T</code></strong>, and <strong><code>ST019CQ01T</code></strong> have been read as numeric, continuous data types, but should be analyzed as nominal data instead.</p>
+<p><strong>Checking for duplicates:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stuqqq_SG[<span class="fu">duplicated</span>(stuqqq_SG),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 1,279
+# ℹ 1,279 variables: CNT &lt;chr&gt;, CNTRYID &lt;dbl&gt;, CNTSCHID &lt;dbl&gt;, CNTSTUID &lt;dbl&gt;,
+#   CYC &lt;chr&gt;, NatCen &lt;chr&gt;, STRATUM &lt;chr&gt;, SUBNATIO &lt;chr&gt;, REGION &lt;dbl&gt;,
+#   OECD &lt;dbl&gt;, ADMINMODE &lt;dbl&gt;, LANGTEST_QQQ &lt;dbl&gt;, LANGTEST_COG &lt;dbl&gt;,
+#   LANGTEST_PAQ &lt;dbl&gt;, Option_CT &lt;dbl&gt;, Option_FL &lt;dbl&gt;, Option_ICTQ &lt;dbl&gt;,
+#   Option_WBQ &lt;dbl&gt;, Option_PQ &lt;dbl&gt;, Option_TQ &lt;dbl&gt;, Option_UH &lt;dbl&gt;,
+#   BOOKID &lt;dbl&gt;, ST001D01T &lt;dbl&gt;, ST003D02T &lt;dbl&gt;, ST003D03T &lt;dbl&gt;,
+#   ST004D01T &lt;dbl&gt;, ST250Q01JA &lt;dbl&gt;, ST250Q02JA &lt;dbl&gt;, ST250Q03JA &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>From the output, there are no duplicated rows found in&nbsp;<em>stuqqq_SG</em></p>
+<p><strong>Checking for missing values:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(stuqqq_SG))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4168500</code></pre>
+</div>
+</div>
+<p>From the output, there are zero missing values across all columns in&nbsp;<strong>stuqqq_SG</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>stuqqq_SG, <span class="fu">aes</span>(<span class="at">x =</span> PV1MATH)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">boundary =</span> <span class="dv">100</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take_home_Ex1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Changing Data Types:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new dataset PV by extracting relevant variables from stu_qqq_SG</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">&lt;-</span> stuqqq_SG <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Math_Score =</span> <span class="fu">rowMeans</span>(<span class="fu">select</span>(., <span class="fu">starts_with</span>(<span class="st">"PV1MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV2MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV3MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV4MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV5MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV6MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV7MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV8MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV9MATH"</span>), <span class="fu">starts_with</span>(<span class="st">"PV10MATH"</span>)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Reading_Score =</span> <span class="fu">rowMeans</span>(<span class="fu">select</span>(., <span class="fu">starts_with</span>(<span class="st">"PV1READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV2READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV3READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV4READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV5READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV6READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV7READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV8READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV9READ"</span>), <span class="fu">starts_with</span>(<span class="st">"PV10READ"</span>)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Science_Score =</span> <span class="fu">rowMeans</span>(<span class="fu">select</span>(., <span class="fu">starts_with</span>(<span class="st">"PV1SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV2SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV3SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV4SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV5SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV6SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV7SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV8SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV9SCIE"</span>), <span class="fu">starts_with</span>(<span class="st">"PV10SCIE"</span>)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total_Score =</span> Math_Score <span class="sc">+</span> Reading_Score <span class="sc">+</span> Science_Score,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gender =</span> <span class="fu">ifelse</span>(ST004D01T <span class="sc">==</span> <span class="dv">1</span>,  <span class="st">"Female"</span>, <span class="st">"Male"</span>),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">A_computer =</span> <span class="fu">ifelse</span>(ST250Q02JA <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Yes"</span> , <span class="st">"No"</span>),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mi_num =</span> ST251Q06JA</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(CNTSCHID, CNTSTUID, Math_Score, Reading_Score, Science_Score, Total_Score, Gender, A_computer, mi_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>check the dataset using&nbsp;<em>“str”:</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PV)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [6,606 × 9] (S3: tbl_df/tbl/data.frame)
+ $ CNTSCHID     : num [1:6606] 70200052 70200134 70200112 70200004 70200152 ...
+  ..- attr(*, "label")= chr "Intl. School ID"
+ $ CNTSTUID     : num [1:6606] 70200001 70200002 70200003 70200004 70200005 ...
+  ..- attr(*, "label")= chr "Intl. Student ID"
+ $ Math_Score   : num [1:6606] 605 690 677 401 436 ...
+ $ Reading_Score: num [1:6606] 667 628 583 361 476 ...
+ $ Science_Score: num [1:6606] 640 672 660 344 479 ...
+ $ Total_Score  : num [1:6606] 1912 1990 1920 1106 1391 ...
+ $ Gender       : chr [1:6606] "Female" "Male" "Male" "Male" ...
+ $ A_computer   : chr [1:6606] "Yes" "Yes" "Yes" "Yes" ...
+ $ mi_num       : num [1:6606] 3 4 2 2 1 2 2 3 4 1 ...
+  ..- attr(*, "label")= chr "How many of these items are there at your [home]: Musical instruments (e.g. guitar, piano, [country-specific example])"</code></pre>
+</div>
+</div>
+<p><strong>converts school ID and student ID from numeric values to characters:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>PV<span class="sc">$</span>CNTSCHID <span class="ot">&lt;-</span> <span class="fu">as.character</span>(PV<span class="sc">$</span>CNTSCHID)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>PV<span class="sc">$</span>CNTSCHID <span class="ot">&lt;-</span> <span class="fu">as.character</span>(PV<span class="sc">$</span>CNTSTUID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Clear missing value:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(PV)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis"><strong>3 Exploratory Data Analysis</strong></h2>
+<section id="distribution-of-student-performance" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-of-student-performance"><strong>3.1 Distribution of Student Performance</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Math_Score)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="at">boundary =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">fill =</span> <span class="st">"light blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths scores"</span>)<span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Reading_Score)) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="at">boundary =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">fill =</span> <span class="st">"light blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Reading scores"</span>)<span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Science_Score)) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="at">boundary =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">fill =</span> <span class="st">"light blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Science scores"</span>)<span class="sc">+</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Total_Score)) <span class="sc">+</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="at">boundary =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">fill =</span> <span class="st">"light blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Total scores"</span>)<span class="sc">+</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>plot1 <span class="sc">+</span> plot2 <span class="sc">+</span> plot3 <span class="sc">+</span> plot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take_home_Ex1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="student-performance-gender" class="level3">
+<h3 class="anchored" data-anchor-id="student-performance-gender"><strong>3.2 Student Performance —— Gender</strong></h3>
+<p>The following code generates density plots to compare the distribution of academic performance between students of different genders, providing a comprehensive understanding of the gender differences in academic achievement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Math_Score, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">stat =</span> <span class="st">"density"</span>) <span class="sc">+</span>  </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"light pink"</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"light blue"</span>)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Math Scores by Gender"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Reading_Score, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">stat =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"light pink"</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"light blue"</span>)) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reading Scores by Gender"</span>) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)<span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Science_Score, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">stat =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"light pink"</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"light blue"</span>)) <span class="sc">+</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Science Scores by Gender"</span>) <span class="sc">+</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)<span class="sc">+</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Total_Score, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">stat =</span> <span class="st">"density"</span>) <span class="sc">+</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"light pink"</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"light blue"</span>)) <span class="sc">+</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Scores by Gender"</span>) <span class="sc">+</span> </span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)<span class="sc">+</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>combined_plots <span class="ot">&lt;-</span> plot1 <span class="sc">+</span> plot2 <span class="sc">+</span> plot3 <span class="sc">+</span> plot4 <span class="sc">+</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>combined_plots</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take_home_Ex1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="student-performance-by-school" class="level3">
+<h3 class="anchored" data-anchor-id="student-performance-by-school"><strong>3.3 Student Performance by School</strong></h3>
+<p>The following code calculates the maths, reading, and science, as well as the average grades in these three subjects for each school’s students, and synthesises a new dataset for graphing in the next step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>School_Avg_Scores <span class="ot">&lt;-</span> PV <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(CNTSCHID) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Math_Score =</span> <span class="fu">mean</span>(Math_Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Reading_Score =</span> <span class="fu">mean</span>(Reading_Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Science_Score =</span> <span class="fu">mean</span>(Science_Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Score =</span> <span class="fu">mean</span>(Total_Score<span class="sc">/</span><span class="dv">3</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>School_Avg_Scores_subjects <span class="ot">&lt;-</span> School_Avg_Scores <span class="sc">%&gt;%</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(CNTSCHID, <span class="fu">starts_with</span>(<span class="st">"Avg_"</span>))</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>School_Avg_Scores_long <span class="ot">&lt;-</span> School_Avg_Scores_subjects <span class="sc">%&gt;%</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>CNTSCHID, </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Subject"</span>, </span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Score"</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following code draws box plots showing the distribution of school average scores in each subject, with text labels identifying the four highest-scoring schools and the two lowest-scoring schools in each subject.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>outliers_data <span class="ot">&lt;-</span> School_Avg_Scores <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"Avg_"</span>), <span class="at">names_to =</span> <span class="st">"Subject"</span>, <span class="at">values_to =</span> <span class="st">"Score"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Subject) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Score) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, (<span class="fu">n</span>() <span class="sc">-</span> <span class="dv">3</span>)<span class="sc">:</span>(<span class="fu">n</span>())))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(School_Avg_Scores_long, <span class="fu">aes</span>(<span class="at">x =</span> Subject, <span class="at">y =</span> Score, <span class="at">fill =</span> Subject)) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> outliers_data, <span class="fu">aes</span>(<span class="at">label =</span> CNTSCHID), </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">box.padding =</span> <span class="fl">0.8</span>, </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">force =</span> <span class="dv">1</span>, </span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">segment.color =</span> <span class="st">"gray"</span>, </span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span>  <span class="co"># Use ggrepel's geom_text_repel</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Average Scores for Each Subject"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take_home_Ex1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="student-performance-by-computer" class="level3">
+<h3 class="anchored" data-anchor-id="student-performance-by-computer"><strong>3.4 Student Performance by Computer</strong></h3>
+<p>The following code plots box-and-line graphs to compare student performance in maths, reading, science and overall scores by whether or not they had a computer to themselves.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span>Math_Score , <span class="at">y =</span> A_computer)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"light gray"</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Math Score by Computers"</span>,<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span>Reading_Score , <span class="at">y =</span> A_computer)) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_boxplot</span>( <span class="at">fill =</span> <span class="st">"light gray"</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Reading Score by Computers"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Science_Score , <span class="at">y =</span> A_computer)) <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_boxplot</span>( <span class="at">fill =</span> <span class="st">"light gray"</span>) <span class="sc">+</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Science Score by Computers"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PV, <span class="fu">aes</span>(<span class="at">x =</span> Total_Score , <span class="at">y =</span> A_computer)) <span class="sc">+</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_boxplot</span>( <span class="at">fill =</span> <span class="st">"light gray"</span>) <span class="sc">+</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Total Score by Computers"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>              <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>combined_plot<span class="ot">&lt;-</span> p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3 <span class="sc">+</span> p4</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take_home_Ex1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="student-performance-by-musical-instruments" class="level3">
+<h3 class="anchored" data-anchor-id="student-performance-by-musical-instruments"><strong>3.5 Student Performance by Musical Instruments</strong></h3>
+<p>The following code shows scatter plots of students' maths, reading, science and overall performance against the number of musical instruments owned, as well as showing the relationship by fitting a line through linear regression.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plot_math <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>PV, <span class="fu">aes</span>(<span class="at">x=</span>mi_num, <span class="at">y=</span>Math_Score)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">size=</span><span class="fl">0.5</span>,<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Math Score by Musical instruments"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot_reading <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>PV, <span class="fu">aes</span>(<span class="at">x=</span>mi_num, <span class="at">y=</span>Reading_Score)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">size=</span><span class="fl">0.5</span>,<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Reading Score by Musical instruments"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plot_science <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>PV, <span class="fu">aes</span>(<span class="at">x=</span>mi_num, <span class="at">y=</span>Science_Score)) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">size=</span><span class="fl">0.5</span>,<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Science Score by Musical instruments"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>plot_total <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>PV, <span class="fu">aes</span>(<span class="at">x=</span>mi_num, <span class="at">y=</span>Total_Score)) <span class="sc">+</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">size=</span><span class="fl">0.5</span>,<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Total Score by Musical instruments"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)<span class="sc">+</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> plot_math <span class="sc">+</span> plot_reading <span class="sc">+</span> plot_science <span class="sc">+</span> plot_total</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Take_home_Ex1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion"><strong>4 Conclusion</strong></h2>
+<ul>
+<li><p>The distribution of students' performance across subjects is right-skewed , indicating that the majority of students tend to have scores clustered towards the higher end of the scale, with a tail extending towards the lower scores.</p></li>
+<li><p>Gender differences were observed, with males slightly excelling in mathematics, while females performed better in reading.</p></li>
+<li><p>School-level analysis showcased a wide performance variation, with some excelling in specific subjects.</p></li>
+<li><p>the visual analysis suggests a possible advantage in academic performance for students who have computers, but more rigorous statistical analysis would be necessary to establish causality and understand the underlying factors contributing to this trend.</p></li>
+<li><p>Socioeconomic factors like musical instruments influence scores positively. Students with more instruments tended to perform better, and those with private rooms consistently outperformed peers without.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
