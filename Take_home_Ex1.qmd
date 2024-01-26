@@ -327,7 +327,7 @@ combined_plot
 
 ### **3.5 Student Performance by Musical Instruments**
 
-The following code shows scatter plots of students\' maths, reading, science and overall performance against the number of musical instruments owned, as well as showing the relationship by fitting a line through linear regression.
+The following code shows scatter plots of students' maths, reading, science and overall performance against the number of musical instruments owned, as well as showing the relationship by fitting a line through linear regression.
 
 ```{r}
 plot_math <- ggplot(data=PV, aes(x=mi_num, y=Math_Score)) +
@@ -372,7 +372,7 @@ combined_plot
 
 ## **4 Conclusion**
 
--   The distribution of students\' performance across subjects is right-skewed , indicating that the majority of students tend to have scores clustered towards the higher end of the scale, with a tail extending towards the lower scores.
+-   The distribution of students' performance across subjects is right-skewed , indicating that the majority of students tend to have scores clustered towards the higher end of the scale, with a tail extending towards the lower scores.
 
 -   Gender differences were observed, with males slightly excelling in mathematics, while females performed better in reading.
 

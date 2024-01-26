@@ -128,6 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./Hands_on_Ex2.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex3.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 3</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -769,7 +773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="student-performance-by-musical-instruments" class="level3">
 <h3 class="anchored" data-anchor-id="student-performance-by-musical-instruments"><strong>3.5 Student Performance by Musical Instruments</strong></h3>
-<p>The following code shows scatter plots of students' maths, reading, science and overall performance against the number of musical instruments owned, as well as showing the relationship by fitting a line through linear regression.</p>
+<p>The following code shows scatter plots of students’ maths, reading, science and overall performance against the number of musical instruments owned, as well as showing the relationship by fitting a line through linear regression.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plot_math <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>PV, <span class="fu">aes</span>(<span class="at">x=</span>mi_num, <span class="at">y=</span>Math_Score)) <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"gray"</span>) <span class="sc">+</span></span>
@@ -826,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion"><strong>4 Conclusion</strong></h2>
 <ul>
-<li><p>The distribution of students' performance across subjects is right-skewed , indicating that the majority of students tend to have scores clustered towards the higher end of the scale, with a tail extending towards the lower scores.</p></li>
+<li><p>The distribution of students’ performance across subjects is right-skewed , indicating that the majority of students tend to have scores clustered towards the higher end of the scale, with a tail extending towards the lower scores.</p></li>
 <li><p>Gender differences were observed, with males slightly excelling in mathematics, while females performed better in reading.</p></li>
 <li><p>School-level analysis showcased a wide performance variation, with some excelling in specific subjects.</p></li>
 <li><p>the visual analysis suggests a possible advantage in academic performance for students who have computers, but more rigorous statistical analysis would be necessary to establish causality and understand the underlying factors contributing to this trend.</p></li>
