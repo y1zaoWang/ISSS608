@@ -1,1 +1,14 @@
 /* css styles */
+
+.insightbox {
+  padding: 1em 1em 1em 2em;
+  margin-bottom: 10px;
+  border: 1.5px solid #a6a39a;
+  border-radius: 10px;
+  font-size: 18px;
+  background:  #f5f3e9 5px center/3em no-repeat;
+}
+
+pre.sourceCode {
+  background-color: #f8f8f8; 
+}
