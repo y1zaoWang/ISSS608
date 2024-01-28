@@ -13,7 +13,7 @@ In this hands-on exercise, you will learn how to create interactive data visuali
 
 First, write a code chunk to check, install and launch the following R packages:
 
--   [**ggiraph**](https://davidgohel.github.io/ggiraph/) for making \'ggplot\' graphics interactive.
+-   [**ggiraph**](https://davidgohel.github.io/ggiraph/) for making 'ggplot' graphics interactive.
 
 -   [**plotly**](https://plotly.com/r/), R library for plotting interactive statistical graphs.
 
@@ -79,7 +79,7 @@ Notice that two steps are involved. First, an interactive version of ggplot2 geo
 
 ## **3.5 Interactivity**
 
-By hovering the mouse pointer on an data point of interest, the student\'s ID will be displayed.
+By hovering the mouse pointer on an data point of interest, the student's ID will be displayed.
 
 ### **3.5.1 Displaying multiple information on tooltip**
 
@@ -110,7 +110,7 @@ The first three lines of codes in the code chunk create a new field called *tool
 
 ## **3.6 Interactivity**
 
-By hovering the mouse pointer on an data point of interest, the student\'s ID and Class will be displayed.
+By hovering the mouse pointer on an data point of interest, the student's ID and Class will be displayed.
 
 ### **3.6.1 Customising Tooltip style**
 
@@ -197,7 +197,7 @@ girafe(
 
 Interactivity: Elements associated with a *data_id* (i.e CLASS) will be highlighted upon mouse over.
 
-Note that the default value of the hover css is *hover_css = \"fill:orange;\"*.
+Note that the default value of the hover css is *hover_css = "fill:orange;"*.
 
 ### **3.6.4 Styling hover effect**
 
@@ -333,7 +333,7 @@ The *data_id* aesthetic is critical to link observations between plots and the t
 
 ## **3.7 Interactive Data Visualisation - plotly methods!**
 
-Plotly\'s R graphing library create interactive web graphics from **ggplot2** graphs and/or a custom interface to the (MIT-licensed) JavaScript library [**plotly.js**](https://plotly.com/javascript/) inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
+Plotly's R graphing library create interactive web graphics from **ggplot2** graphs and/or a custom interface to the (MIT-licensed) JavaScript library [**plotly.js**](https://plotly.com/javascript/) inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
 
 There are two ways to create interactive graph by using plotly, they are:
 
@@ -419,7 +419,7 @@ Thing to learn from the code chunk:
 
 -   A wrapper of the JavaScript Library [DataTables](https://datatables.net/)
 
--   Data objects in R can be rendered as HTML tables using the JavaScript library \'DataTables\' (typically via R Markdown or Shiny).
+-   Data objects in R can be rendered as HTML tables using the JavaScript library 'DataTables' (typically via R Markdown or Shiny).
 
 ```{r}
 DT::datatable(exam_data, class= "compact")
@@ -468,7 +468,7 @@ This [link](https://davidgohel.github.io/ggiraph/) provides online version of th
 
 -   [Plotly R Figure Reference](https://plotly.com/r/reference/index/) provides a comprehensive discussion of each visual representations.
 
--   [Plotly R Library Fundamentals](https://plotly.com/r/plotly-fundamentals/) is a good place to learn the fundamental features of Plotly\'s R API.
+-   [Plotly R Library Fundamentals](https://plotly.com/r/plotly-fundamentals/) is a good place to learn the fundamental features of Plotly's R API.
 
 -   [Getting Started](https://gganimate.com/articles/gganimate.html)
 

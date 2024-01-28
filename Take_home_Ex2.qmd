@@ -1,0 +1,1292 @@
+---
+title: "Take home Exercise 2"
+author: "Wyz"
+---
+
+# **Take-home Exercise 2: DataVis Makeover A Look into Singapore Students' Performance Using PISA 2022------FU WEIMING**
+
+![](images/singapore%20education.jpg)
+
+# **1 Overview**
+
+## **1.1 Setting the scene**
+
+OECD education director Andreas Schleicher shared in a [BBC article](https://www.bbc.com/news/education-38212070 "Pisa tests: Singapore top in global education rankings") that "Singapore managed to achieve excellence without wide differences between children from wealthy and disadvantaged families." (2016) Furthermore, several Singapore's Minister for Education also started an "every school a good school" slogan. In fact, according to a recent [Straits Times article (2023)](https://www.straitstimes.com/singapore/singapore-students-rank-top-in-maths-science-and-reading-in-oecd-study "Singapore students rank top in maths, science and reading in OECD study"), Singapore students ranked the best of all countries in all 3 domains in PISA 2022.
+
+The general public, however, strongly belief that there are still disparities that exist, especially between the elite schools and neighborhood school, between students from families with higher socioeconomic status and those with relatively lower socioeconomic status and immigration and non-immigration families.
+
+## **1.2 Our task**
+
+The 2022 Programme for International Student Assessment (PISA) data was released on December 5, 2022. PISA global education survey every three years to assess the education systems worldwide through testing 15 year old students in the subjects of mathematics, reading, and science.
+
+In this exercise, we are required to use **Exploratory Data Analysis (EDA)** methods and [ggplot2](https://ggplot2.tidyverse.org/) data visualisation functions to reveal:
+
+-   the distribution of Singapore students' performance in mathematics, reading, and science, and
+
+-   the relationship between these performances with schools, gender and socioeconomic status of the students.
+
+## **1.3 The Data**
+
+The [PISA 2022 database](https://www.oecd.org/pisa/data/2022database/) contains the full set of responses from individual students, school principals and parents. There are a total of five data files and their contents are as follows:
+
+-   Student questionnaire data file
+
+-   School questionnaire data file
+
+-   Teacher questionnaire data file
+
+-   Cognitive item data file
+
+-   Questionnaire timing data file
+
+In this exercise, we will use the **Student questionnaire data file** only.
+
+# **2 Data Preparation**
+
+## **2.1 Loading R packages**
+
+The `pacman::p_load()` function is used to install and load the required R packages into the R environment, as below.
+
+-   [tidyverse](https://www.tidyverse.org/): collection of R packages designed for data science
+
+-   [haven](https://haven.tidyverse.org/): an R package to read and write data formats used by other statistical packages, e.g. SAS, SPSS
+
+-   [ggrepel](https://ggrepel.slowkow.com/): an R package provides geoms for ggplot2 to repel overlapping text labels.
+
+-   [ggthemes](https://ggplot2.tidyverse.org/reference/ggtheme.html): an R package provides some extra themes, geoms, and scales for 'ggplot2'.
+
+-   [hrbrthemes](https://cran.r-project.org/web/packages/hrbrthemes/): an R package provides typography-centric themes and theme components for ggplot2.
+
+-   [patchwork](https://cran.r-project.org/web/packages/patchwork/): an R package for preparing composite figure created using ggplot2.
+
+-   [DT](https://cloud.r-project.org/web/packages/DT/): an R package to render interactive DataTables
+
+-   [knitr](https://cran.r-project.org/web/packages/knitr/): an R package for dynamic report generation
+
+-   [kableExtra](https://cran.r-project.org/web/packages/kableExtra/): an R package to build complex HTML tables using kable()
+
+-   [ggridges](https://cran.r-project.org/web/packages/ggridges/): an R package for plotting Ridgeline plots
+
+-   [qqplotr](https://cran.r-project.org/web/packages/qqplotr/): an R package which extends ggplot2 Q-Q plot functionalities
+
+-   [rstatix](https://cran.r-project.org/web/packages/rstatix/): an R package for performaing basic statistical tests
+
+-   [ggdist](https://cran.r-project.org/web/packages/ggdist/): an R package that provides a flexible set of ggplot2 geoms and stats for visualising distributions and uncertainties
+
+-   [ggstatsplot](https://cran.r-project.org/web/packages/ggstatsplot/): an R package that extends ggplot2 to create graphics with details from statistical tests
+
+```{r}
+pacman::p_load(tidyverse, haven, ggrepel, ggthemes, hrbrthemes, patchwork, DT, knitr, kableExtra, ggridges, qqplotr, rstatix, ggdist, ggstatsplot)
+```
+
+## **2.2 Importing PISA data**
+
+The code chunk below uses [`read_sas()`](https://haven.tidyverse.org/reference/read_sas.html) of [haven](https://haven.tidyverse.org/) to import PISA data into R environment.
+
+```{r}
+stu_qqq <- read_sas("THE1/data/cy08msp_stu_qqq.sas7bdat")
+```
+
+Filtering the entire data file for records belonging to Singapore students.
+
+```{r}
+stu_qqq_SG <- stu_qqq %>%
+  filter(CNT == "SGP") 
+```
+
+Saving the records belonging to Singapore students into "stu_qqq_SG.rds" file for easier loading (no need to extract the records from the entire dataset repeatedly).
+
+```{r}
+write_rds(stu_qqq_SG,
+          "THE1/data/stu_qqq_SG.rds")
+```
+
+Loading the extract records from the saved "stu_qqq_SG.rds" file.
+
+```{r}
+sfu_qqq_SG <- read_rds("THE1/data/stu_qqq_SG.rds")
+```
+
+## **2.3 Summary statistics of PISA data**
+
+Below code chunks detail initial observations and summary statistics relating to Singapore students:
+
+```{r}
+kable(head(sfu_qqq_SG, 8), "html")
+```
+
+```{r}
+glimpse(sfu_qqq_SG)
+```
+
+```{r}
+sfu_qqq_SG[duplicated(sfu_qqq_SG),]
+```
+
+```{r}
+sum(is.na(sfu_qqq_SG))
+```
+
+1.  "The dataset comprises 6,066 records of Singapore students across 1,279 variables. Initial inspection suggests a high-dimensional data structure."
+
+2.  "Given the comprehensive nature of the questionnaire responses, many of the over one thousand variables might be extraneous for our analysis. We will therefore focus on extracting and analyzing only those variables that are relevant."
+
+3.  "A significant number of variables contain 'NA' values, indicating missing data. These will be further assessed and addressed appropriately after isolating the variables critical for our analysis."
+
+4.  "An initial review confirms that the dataset is free of duplicate entries."
+
+## **2.4 Extraction of relevant variables**
+
+Below code chunks are used to extract the variables that are required for further analysis to meet the task objectives. Variables required are:
+
+-   StudentID, denoted by CNTSTUID
+
+-   Estimate measure for student's performance
+
+    -   Plausible values (PVs) for each of the three domains, i.e. MATHS, SCIENCE and READING, denoted by PV{N}{DOMAIN} where N is the nth plausible value for the DOMAIN.
+
+-   School
+
+    -   SchoolID, denoted by CNTSCHID
+
+    -   Whether school is public or independent, denoted by STRATUM.
+
+-   Gender
+
+    -   Female or Male, denoted by ST004D01T.
+
+-   Measure for socioeconomic status
+
+    -   Denoted by ESCS, which is an index that measures economic, social and cultural status.
+
+```{r}
+req_cols <- c("CNTSTUID", 
+              "PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH", "PV6MATH", "PV7MATH", "PV8MATH", "PV9MATH", "PV10MATH", 
+              "PV1READ", "PV2READ", "PV3READ", "PV4READ", "PV5READ", "PV6READ", "PV7READ", "PV8READ", "PV9READ", "PV10READ",
+              "PV1SCIE", "PV2SCIE", "PV3SCIE", "PV4SCIE", "PV5SCIE", "PV6SCIE", "PV7SCIE", "PV8SCIE", "PV9SCIE", "PV10SCIE",
+              "CNTSCHID",
+              "STRATUM",
+              "ST004D01T", 
+              "ESCS", 
+              "HOMEPOS", 
+              "ICTRES",
+              "HISEI",
+              "PAREDINT")
+sfu_qqq_SG_req <- sfu_qqq_SG[req_cols] %>% 
+  mutate(ST004D01T = as.factor(ST004D01T),
+         CNTSTUID = as.character(CNTSTUID),
+         CNTSCHID = as.character(CNTSCHID))
+```
+
+```{r}
+datatable(head(sfu_qqq_SG_req, 8),
+          rownames = FALSE,
+          options = list(dom = c("t")),
+          style = "bootstrap")
+```
+
+There exists extracted variables with values of "NA" within the dataset.
+
+```{r}
+names(which(colSums(is.na(sfu_qqq_SG_req))>0))
+```
+
+**Below code is used to find out the number of "NA" values within each variable**, with the most "NA" (at approx. 5% of records) being observed for the variable "HISEI" which is an index representing the highest parental occupational status.
+
+```{r}
+(colSums(is.na(sfu_qqq_SG_req)))
+```
+
+# **3 Data Wrangling**
+
+## **3.1 Compute mean PV values for each domain**
+
+The PISA statistics provides 10 plausible values (PVs) for each student in each of the three domains. The plausible values provides more accurate and reliable estimates of students' abilities and overall performance of educational systems. The mean value of 10 PVs is computed to represent the average of the 10 estimates, which is then used as an estimation of the particular students' PV. Below code chunk is used to perform the computation.
+
+```{r}
+# computation for Math PVs
+sfu_qqq_SG_req["PVMATH_final"] <- sfu_qqq_SG_req %>%
+  select("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH", "PV6MATH", "PV7MATH", "PV8MATH", "PV9MATH", "PV10MATH") %>% 
+  apply(, MARGIN=1, FUN=mean)
+
+# computation for READING PVs
+sfu_qqq_SG_req["PVREAD_final"] <- sfu_qqq_SG_req %>%
+  select("PV1READ", "PV2READ", "PV3READ", "PV4READ", "PV5READ", "PV6READ", "PV7READ", "PV8READ", "PV9READ", "PV10READ") %>% 
+  apply(, MARGIN=1, FUN=mean)
+
+# computation for SCIENCE PVs
+sfu_qqq_SG_req["PVSCIE_final"] <- sfu_qqq_SG_req %>%
+  select("PV1SCIE", "PV2SCIE", "PV3SCIE", "PV4SCIE", "PV5SCIE", "PV6SCIE", "PV7SCIE", "PV8SCIE", "PV9SCIE", "PV10SCIE") %>% 
+  apply(, MARGIN=1, FUN=mean)
+
+datatable(head(sfu_qqq_SG_req[c("CNTSTUID", "PVMATH_final", "PVREAD_final", "PVSCIE_final")], 8),
+          rownames = FALSE,
+          options = list(dom = c("t")),
+          style = "bootstrap",
+          caption = "Table showing computed mean values")
+```
+
+## **3.2 Mapping PV Values into Performance Levels**
+
+Using the performance band definitions of each domain provided in [PISA 2022 Technical Report (Chapter 17)](https://www.oecd.org/pisa/data/pisa2022technicalreport/), the mean PV values were mapped into the respective performance level using the mean of the PV estimate. The performance band definitions for the domains are shown below.
+
+**Math:**
+
+Below code chunks map the mean PVs of the three domains into their respective performance levels:
+
+```{r}
+# mapping MATH PV
+sfu_qqq_SG_req["MATH_level"] <- cut(sfu_qqq_SG_req$PVMATH_final, 
+                                    breaks = c(0, 233.17, 295.46999, 357.76999, 420.06999, 482.37999, 544.67999, 606.98999, 669.29999, 2000),
+                                    labels = c("Below 1c", "Level 1c", "Level 1b", "Level 1a", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"))
+
+# mapping READING PV
+sfu_qqq_SG_req["READ_level"] <- cut(sfu_qqq_SG_req$PVREAD_final, 
+                                    breaks = c(0, 189.32999, 262.03999, 334.74999, 407.46999, 480.17999, 552.88999, 625.60999, 698.31999, 2000),
+                                    labels = c("Below 1c", "Level 1c", "Level 1b", "Level 1a", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"))
+
+# mapping SCIENCE PV
+sfu_qqq_SG_req["SCIE_level"] <- cut(sfu_qqq_SG_req$PVSCIE_final, 
+                                    breaks = c(0, 260.53999, 334.93999, 409.53999, 484.13999, 558.72999, 633.32999, 707.92999, 2000),
+                                    labels = c("Below 1b", "Level 1b", "Level 1a", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"))
+
+datatable(head(sfu_qqq_SG_req[c("CNTSTUID", "MATH_level", "READ_level", "SCIE_level")], 8),
+          rownames = FALSE,
+          options = list(dom = c("t")),
+          style = "bootstrap",
+          caption = "Table showing mapped performance levels for three domains")
+```
+
+## **3.3 Recoding School Category and Gender**
+
+The values of the variables representing school category (i.e. public or private) and gender (i,e, male or female) are recoded for easier visual interpretation. These values are represented using numbers or non-intuitive tags in the dataset. The code chunks below are used to recode the values.
+
+```{r}
+sfu_qqq_SG_req <- sfu_qqq_SG_req %>% 
+# gender
+  mutate(ST004D01T = case_when(ST004D01T == 1 ~ "Female",
+                               ST004D01T == 2 ~ "Male",
+                               TRUE ~ "Not mentioned")) %>% 
+# school category
+  mutate(STRATUM = case_when(STRATUM == "SGP01" ~ "Public Sch",
+                             STRATUM == "SGP02" ~ "Public Sch",
+                             STRATUM == "SGP03" ~ "Private Sch",
+                             STRATUM == "SGP97" ~ "Undisclosed",
+                             TRUE ~ "Unknown code"))
+
+datatable(head(sfu_qqq_SG_req[c("CNTSTUID", "ST004D01T", "STRATUM")], 8),
+          rownames = FALSE,
+          options = list(dom = c("t")),
+          style = "bootstrap",
+          caption = "Table showing recoded values")
+```
+
+**Visualising distributions of Gender:**
+
+```{r}
+gender_bar <- ggplot(data = sfu_qqq_SG_req,
+       aes(x=ST004D01T)) +
+  geom_bar(fill = "lightblue") + 
+  labs(x = NULL, 
+       y = "Num of students") +
+  theme_pander() +
+  ggtitle("Distribution of students by gender") + 
+  theme(plot.title = element_text(size = 12)) 
+
+gender_box_math <- ggplot(data = sfu_qqq_SG_req,
+                     aes(x = ST004D01T, y = PVMATH_final)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0,1000)) +
+  theme_pander() +
+  labs (x = NULL,
+        y = NULL) +
+  ggtitle("Math") +
+  theme(plot.title = element_text(size = 10)) +
+  coord_flip()
+
+gender_box_read <- ggplot(data = sfu_qqq_SG_req,
+                     aes(x = ST004D01T, y = PVREAD_final)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0,1000)) +
+  theme_pander() +
+  labs (x = NULL,
+        y = NULL) +
+  ggtitle("Reading") +
+  theme(plot.title = element_text(size = 10)) +
+  coord_flip()
+
+gender_box_scie <- ggplot(data = sfu_qqq_SG_req,
+                     aes(x = ST004D01T, y = PVSCIE_final)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0,1000)) +
+  theme_pander() +
+  labs (x = NULL,
+        y = NULL) +
+  ggtitle("Science") +
+  theme(plot.title = element_text(size = 10)) +
+  coord_flip()
+
+gender_bar | (gender_box_math / gender_box_read / gender_box_scie)
+```
+
+The recoded gender data, using "ST004D01T", shows a balanced distribution between male and female students. Initial boxplot analysis suggests females outperform males in Reading, and males outperform females in Math and Science. Given the overlap in boxplots, further exploratory data analysis is required to uncover deeper insights.
+
+**Visualising distributions of School Category:**
+
+```{r}
+school_bar <- ggplot(data = sfu_qqq_SG_req,
+       aes(x=STRATUM)) +
+  geom_bar(fill = "lightblue") + 
+  labs(x = NULL, 
+       y = "Num of students") +
+  theme_pander() +
+  ggtitle("Distribution of students by school") + 
+  theme(plot.title = element_text(size = 12)) 
+
+school_box_math <- ggplot(data = sfu_qqq_SG_req,
+                     aes(x = STRATUM, y = PVMATH_final)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0,1000)) +
+  theme_pander() +
+  labs (x = NULL,
+        y = NULL) +
+  ggtitle("Math") +
+  theme(plot.title = element_text(size = 10)) +
+  coord_flip()
+
+school_box_read <- ggplot(data = sfu_qqq_SG_req,
+                     aes(x = STRATUM, y = PVREAD_final)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0,1000)) +
+  theme_pander() +
+  labs (x = NULL,
+        y = NULL) +
+  ggtitle("Reading") +
+  theme(plot.title = element_text(size = 10)) +
+  coord_flip()
+
+school_box_scie <- ggplot(data = sfu_qqq_SG_req,
+                     aes(x = STRATUM, y = PVSCIE_final)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0,1000)) +
+  theme_pander() +
+  labs (x = NULL,
+        y = NULL) +
+  ggtitle("Science") +
+  theme(plot.title = element_text(size = 10)) +
+  coord_flip()
+
+school_bar | (school_box_math / school_box_read / school_box_scie)
+```
+
+Post-recoding the school category with "STRATUM", an uneven distribution between public and private school students was noted, aligning with the greater prevalence of public schools in Singapore.
+
+For further exploratory data analysis, it's essential to consider this imbalance. A probability density approach is suggested to more accurately compare performance distributions across school types.
+
+# **4 Exploratory Data Analysis**
+
+## **4.1 Distribution of Singapore students\' performance in Math, Reading, and Science**
+
+In this section, the raincloud plot is used to provide a visual overview of students\' performances in the three domains. The raincloud plot is a data visualisation technique that provides a half density distribution diagram, and thus is able to provide additional insights, such as the existence of multiple modalities, which could suggests the possibility of groups. Using the raincloud plot, we were able to come up with insights and hypothesis, which could be examined further using CDA techniques.
+
+Below are the code chunks for this data visualisation:
+
+```{r}
+
+# Combine score data into one data frame with domain as a factor
+all_scores <- sfu_qqq_SG_req %>%
+  select(PVMATH_final, PVREAD_final, PVSCIE_final) %>%
+  pivot_longer(cols = everything(), names_to = "Domain", values_to = "Score") %>%
+  mutate(Domain = factor(Domain, levels = c("PVMATH_final", "PVREAD_final", "PVSCIE_final"), 
+                         labels = c("MATH", "READING", "SCIENCE")))
+
+# Plot the distribution of student performance by domain
+ggplot(all_scores, aes(x = Domain, y = Score)) +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.4,
+               .width = 0,
+               point_colour = NA,
+               scale = 0.2,
+               alpha = 0.4,
+               fill = "blue") +
+  geom_boxplot(width = 0.1, outlier.shape = NA) +
+  stat_dots(side = "left",
+            justification = 1.5,
+            binwidth = unit(0.0022, "npc"),
+            dotsize = 1,
+            scale = 0.01,
+            position = "dodge",
+            alpha = 0.4,
+            color = "lightblue") +
+  coord_flip(xlim = c(0.6, 2.8)) +
+  theme_minimal() +
+  labs(title = "Distribution of Singapore Students' Performance by Domain")
+
+```
+
+The visualizations reveal distinct aspects of Singapore students' performance across domains:
+
+1.  The density peaks for Math and Science are positioned at higher scores than Reading, indicating stronger performance in these areas. This is corroborated by the boxplots, which show a lower median score for Reading.
+
+2.  The inverted dot plots demonstrate comparable distribution shapes across domains, but with a denser concentration of high-scoring dots in Math and Science, suggesting more students excelling in these subjects.
+
+3.  Outliers are present only on the lower score range for all domains, but their scarcity suggests a minor impact on the overall data.
+
+4.  The dot plots hint at potential multimodality in the Reading and Science score distributions, an insight that could guide further analysis.
+
+## **4.2 Student gender seems to make a difference in performance**
+
+Here, we use the ridge plot to plot out the density distributions of the performance proxy, i.e. the average Plausible Value for each domain, and compare the density distributions across the domains by gender, so as to see if any hypothesis or insights on possible relationship between gender and performance can be derived.
+
+Below are the code chunks for the data visualisation.
+
+**DATA VIZ**
+
+```{r}
+math_ridge <- ggplot(sfu_qqq_SG_req, 
+       aes(x = PVMATH_final,
+           y = ST004D01T,
+           fill = ST004D01T,
+           color = ST004D01T))+
+  geom_density_ridges(bandwidth = 15,
+                      alpha = .5) +
+  labs(x = NULL,
+       y = NULL) +
+  scale_x_continuous(limits=c(100,900)) +
+  annotate(geom = "text",
+           x=830,
+           y=3,
+           label = "Male students recorded peak\nfrequency at higher Math score",
+           size = 2) +
+  annotate(geom = "label",
+           x=120,
+           y=3,
+           label = "Math",
+           size = 4) +
+  theme_minimal() +
+  theme(legend.position="none",
+        axis.text.x = element_blank())
+
+read_ridge <- ggplot(sfu_qqq_SG_req, 
+       aes(x = PVREAD_final,
+           y = ST004D01T,
+           fill = ST004D01T,
+           color = ST004D01T))+
+  geom_density_ridges(bandwidth = 15,
+                      alpha = .5) +
+  labs(x = NULL,
+       y = NULL) +
+  scale_x_continuous(limits=c(100,900)) +
+  annotate(geom = "text",
+           x=800,
+           y=3.3,
+           label = "Female and Male students recorded peak\nfrequency at similar Reading score",
+           size = 2) +
+  annotate(geom = "label",
+           x=120,
+           y=3,
+           label = "Reading",
+           size = 4) +
+  theme_minimal() +
+  theme(legend.position="none",
+        axis.text.x = element_blank())
+
+scie_ridge <- ggplot(sfu_qqq_SG_req, 
+       aes(x = PVSCIE_final,
+           y = ST004D01T,
+           fill = ST004D01T,
+           color = ST004D01T))+
+  geom_density_ridges(bandwidth = 15,
+                      alpha = .5) +
+  labs(x = "Score for each domain",
+       y = NULL) +
+  scale_x_continuous(limits=c(100,900)) +
+  annotate(geom = "text",
+           x=820,
+           y=3,
+           label = "Male students recorded peak\nfrequency at higher Science score",
+           size = 2) +
+  annotate(geom = "label",
+           x=120,
+           y=3,
+           label = "Science",
+           size = 4) +
+  theme_minimal() +
+  theme(legend.position="none",
+        axis.title = element_text(size = 8, color = "grey20"))
+
+fig2 <- math_ridge / read_ridge / scie_ridge
+
+fig2 +
+  plot_annotation(title = "Male students performed better in Math and Science")
+```
+
+**NORMALITY TEST**
+
+Below code chunks are used to plot the performances for the 3 domains by gender on Q-Q plots.
+
+For the normality test at 95% confidence interval, we hypothesize that:
+
+-   **H0** = The performance of students in the 3 domains, grouped by gender, are normally distributed
+
+-   **H1** = The underlying distributions are not normally distributed
+
+Visually, the points can be observed to be deviating from the normal line, hence the implication is that the underlying distributions might not be normal.
+
+```{r}
+qq_gender_math <- ggplot(data = sfu_qqq_SG_req,
+      mapping = aes(sample = PVMATH_final,
+                    fill = ST004D01T)) +
+  stat_qq_band(alpha=0.15) +
+  stat_qq_line(alpha=0.15) +
+  stat_qq_point(size=0.5) +
+  facet_wrap(~ST004D01T,
+             nrow = 1) +
+  labs(title = "Q-Q plot for Math \nby gender") +
+  theme_linedraw() +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        plot.background = element_rect(),
+        panel.grid = element_blank())
+
+qq_gender_read <- ggplot(data = sfu_qqq_SG_req,
+      mapping = aes(sample = PVREAD_final,
+                    fill = ST004D01T)) +
+  stat_qq_band(alpha=0.15) +
+  stat_qq_line(alpha=0.15) +
+  stat_qq_point(size=0.5) +
+  facet_wrap(~ST004D01T,
+             nrow = 1) +
+  labs(title = "Q-Q plot for Reading \nby gender") +
+  theme_linedraw() +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        plot.background = element_rect(),
+        panel.grid = element_blank())
+
+qq_gender_scie <- ggplot(data = sfu_qqq_SG_req,
+      mapping = aes(sample = PVSCIE_final,
+                    fill = ST004D01T)) +
+  stat_qq_band(alpha=0.15) +
+  stat_qq_line(alpha=0.15) +
+  stat_qq_point(size=0.5) +
+  facet_wrap(~ST004D01T,
+             nrow = 1) +
+  labs(title = "Q-Q plot for Science \nby gender") +
+  theme_linedraw() +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        plot.background = element_rect(),
+        panel.grid = element_blank())
+
+qq_gender_math | qq_gender_read | qq_gender_scie
+```
+
+The Shapiro-Wilk test for normality was used to test and confirm the visual observations above. The code chunks below details outcome of th
+
+```{r}
+math_sw <- sfu_qqq_SG_req %>% 
+  group_by(ST004D01T) %>% 
+  shapiro_test(PVMATH_final)
+
+read_sw <- sfu_qqq_SG_req %>% 
+  group_by(ST004D01T) %>% 
+  shapiro_test(PVREAD_final)
+
+scie_sw <- sfu_qqq_SG_req %>% 
+  group_by(ST004D01T) %>% 
+  shapiro_test(PVSCIE_final)
+
+combined_sw <- rbind(math_sw, read_sw, scie_sw)
+
+datatable(data = combined_sw,
+          rownames = FALSE,
+          options = list(dom = c("t")),
+          style = "bootstrap",
+          caption = "Table showing Shapiro-Wilk normality test results")
+```
+
+Since the p-value for all the distributions tested are lower than the significance level of 0.05 (taking a 95% confidence level), we **reject the null hypothesis (H0) that the underlying distributions are normally distributed**. This means that the performance of students (grouped by gender) in all three domains do not follow a normal distribution. This implication is that a non-parametric test will be used in subsequent analysis to test if there is any significant statistical difference in the student\'s performance in the three domains according to their gender.
+
+**2 SAMPLE-TEST (NON-PARAMETRIC)**
+
+Here, we use the non-parametric Wilcoxon rank-sum test with the following pairs of hypotheses using 95% confidence level. The ggbetweenstats function of ggstatsplot package is used for the test, as well as showing the outcome in a visual plot.
+
+Hypothesis 1:
+
+-   H0 = There is no difference in the median Math performance of Singapore students by gender.
+
+-   H1 = There is a difference in the median Math performance of Singapore students.
+
+```{r}
+ggbetweenstats(data = sfu_qqq_SG_req,
+               x = ST004D01T,
+               y = PVMATH_final,
+               type = "nonparametric",
+               conf.level = 0.95,
+               ylab = "Math score",
+               xlab = "Gender",
+               title = "2 sample non-parametric test on Math score by gender") +
+  scale_color_manual(values = c("palegreen", "pink", "black")) +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+The p-value obtained from the 2-sample non-parametric test is lower than significance level of 0.05, thus r**ejecting the null hypothesis** that there is no difference in Math performance between genders. Specifically, Male students had a higher median than Female students, suggesting that Male students had performed better in Math.
+
+Hypothesis 2:
+
+-   H0 = There is no difference in the median Reading performance of Singapore students by gender.
+
+-   H1 = There is a difference in the median Reading performance of Singapore students.
+
+```{r}
+ggbetweenstats(data = sfu_qqq_SG_req,
+               x = ST004D01T,
+               y = PVREAD_final,
+               type = "nonparametric",
+               conf.level = 0.95,
+               ylab = "Reading score",
+               xlab = "Gender",
+               title = "2 sample non-parametric test on Reading score by gender") +
+  scale_color_manual(values = c("palegreen", "pink", "black")) +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+The p-value obtained from the 2-sample non-parametric test is lower than significance level of 0.05, thus **rejecting the null hypothesis** that there is no difference in Reading performance between genders. Specifically, Female students had a higher median than Male students, suggesting that Female students had performed better in Reading.
+
+Hypothesis 3:
+
+-   H0 = There is no difference in the median Science performance of Singapore students by gender.
+
+-   H1 = There is a difference in the median Science performance of Singapore students.
+
+```{r}
+ggbetweenstats(data = sfu_qqq_SG_req,
+               x = ST004D01T,
+               y = PVSCIE_final,
+               type = "nonparametric",
+               conf.level = 0.95,
+               ylab = "Science score",
+               xlab = "Gender",
+               title = "2 sample non-parametric test on Science score by gender") +
+  scale_color_manual(values = c("palegreen", "pink", "black")) +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+The p-value obtained from the 2-sample non-parrametric test is lower than significance level of 0.05, thus **rejecting the null hypothesis** that there is no difference in Science performance between genders. Specifically, Male students had a higher median than Female students, suggesting that Male students had performed better in Science.
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DISCUSSIONS & INSIGHTS                                                                                                                                                                                                                                                                                                                                                                                                      |
++=============================================================================================================================================================================================================================================================================================================================================================================================================================+
+| Using the above plots, differences in the distribution across both gender groups can be observed. The insights are:                                                                                                                                                                                                                                                                                                         |
+|                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 1.  The range in performances between the two genders are similar when compared within the same domain. However, across the domains, both genders had density distribution with longer upper tails for Math, while having longer lower tails for Reading. This suggests that both genders likely performed better in Math than Reading.                                                                                     |
+|                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 2.  In terms of the peak frequency in the density distribution, Male students recorded peak frequencies at higher scores for both Math and Science, while being at a similar score compared to Females for Reading. This suggests that a higher proportion of Male students performed better for Math and Science, though this needs to be confirmed by CDA techniques as the ridges for the Male students are skewed left. |
+|                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 3.  The follow-on non-parametric 2-sample tests confirmed the rejection of the null hypothesis, and suggests that there are differences in performance between the 2 genders.                                                                                                                                                                                                                                               |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## **4.3 Public schools seem to exhibit higher disparity in performance**
+
+Here, we use the ridge plot to plot out the density distributions of the performance proxy, i.e. the average Plausible Value for each domain, and compare the density distributions across the domains by school category, so as to see if any hypothesis or insights on possible relationship between school category and performance can be derived.
+
+Together with the density ridge plot, a histogram for the average scores of schools for each of the domains was also plotted, so as to see how the public and private schools compared to each other in terms of average student performance.
+
+Below are the code chunks for the data visualisation.
+
+**DATA VIZ:**
+
+```{r}
+math_ridge_2 <- ggplot(sfu_qqq_SG_req, 
+       aes(x = PVMATH_final,
+           y = STRATUM,
+           fill = STRATUM,
+           color = STRATUM))+
+  geom_density_ridges(bandwidth = 20,
+                      alpha = .5) +
+  labs(x = NULL,
+       y = NULL) +
+  scale_x_continuous(limits=c(100,900)) +
+  annotate(geom = "text",
+           x=275,
+           y=2.7,
+           label = "Public school students \nrecorded peak frequency at \nhigher Math score",
+           size = 2) +
+  annotate(geom = "label",
+           x=840,
+           y=3,
+           label = "Math",
+           size = 3) +
+  theme_minimal() +
+  theme(legend.position="none",
+        axis.text = element_blank())
+
+read_ridge_2 <- ggplot(sfu_qqq_SG_req, 
+       aes(x = PVREAD_final,
+           y = STRATUM,
+           fill = STRATUM,
+           color = STRATUM))+
+  geom_density_ridges(bandwidth = 20,
+                      alpha = .5) +
+  labs(x = NULL,
+       y = NULL) +
+  scale_x_continuous(limits=c(100,900)) +
+  annotate(geom = "text",
+           x=275,
+           y=2.8,
+           label = "Private school students \nrecorded peak frequency at \nhigher Reading score",
+           size = 2) +
+  annotate(geom = "label",
+           x=820,
+           y=3,
+           label = "Reading",
+           size = 3) +
+  theme_minimal() +
+  theme(legend.position="none",
+        axis.text = element_blank())
+
+scie_ridge_2 <- ggplot(sfu_qqq_SG_req, 
+       aes(x = PVSCIE_final,
+           y = STRATUM,
+           fill = STRATUM,
+           color = STRATUM))+
+  geom_density_ridges(bandwidth = 20,
+                      alpha = .5) +
+  labs(x = "Score for each domain",
+       y = NULL) +
+  scale_x_continuous(limits=c(100,900)) +
+  annotate(geom = "text",
+           x=275,
+           y=2.8,
+           label = "Public and Private school \nstudents recorded peak \nfrequency at similar \nScience score",
+           size = 2) +
+  annotate(geom = "label",
+           x=820,
+           y=3,
+           label = "Science",
+           size = 3) +
+  theme_minimal() +
+  theme(legend.position="none",
+        axis.text.y = element_blank(),
+        axis.title = element_text(size = 8, color = "grey20"))
+
+# code producing histograms
+new_df <- sfu_qqq_SG_req %>% 
+  select(c("CNTSCHID", "PVMATH_final", "PVREAD_final", "PVSCIE_final", "STRATUM")) %>% 
+  group_by(sfu_qqq_SG_req$CNTSCHID, STRATUM) %>% 
+  summarise_at(vars(PVMATH_final, PVREAD_final, PVSCIE_final), mean)
+
+math_hist_1 <- ggplot(data = new_df,
+       aes(x = PVMATH_final,
+           fill = STRATUM)) +
+  geom_histogram(bins = 50, alpha = 0.5) +
+  labs(y = NULL,
+       x = NULL) +
+  scale_x_continuous(limits = c(300,800)) +
+  scale_y_continuous(limits = c(0,20)) +
+  theme_light() +
+  theme(legend.position = "none")
+
+read_hist_1 <- ggplot(data = new_df,
+       aes(x = PVREAD_final,
+           fill = STRATUM)) +
+  geom_histogram(bins = 50, alpha = 0.5) +
+  labs(y = "Count of schools",
+       x = NULL) +
+  scale_x_continuous(limits = c(300,800)) +
+  scale_y_continuous(limits = c(0,20)) +
+  theme_light() +
+  theme(legend.position = "none",
+        axis.title = element_text(size = 8, color = "grey20"))
+
+scie_hist_1 <- ggplot(data = new_df,
+       aes(x = PVSCIE_final,
+           fill = STRATUM)) +
+  geom_histogram(bins = 50, alpha = 0.5) +
+  labs(y = NULL,
+       x = "Ave score of individual school") +
+  scale_x_continuous(limits = c(300,800)) +
+  scale_y_continuous(limits = c(0,20)) +
+  theme_light() +
+  theme(legend.title=element_blank(),
+        legend.text = element_text(size = 6),
+        legend.position = "left",
+        axis.title = element_text(size = 8, color = "grey20"))
+
+fig3 <- (math_ridge_2 / read_ridge_2 / scie_ridge_2) | (math_hist_1 / read_hist_1 / scie_hist_1)
+
+fig3 +
+  plot_annotation(title = "Do all schools perform equally well?", subtitle = "Private schools appear to have an edge over Public schools")
+```
+
+**NORMALITY TEST:**
+
+Below code chunks are used to plot the performances for the 3 domains by school category on Q-Q plots.
+
+For the normality test at 95% confidence interval, we hypothesize that:
+
+-   **H0** = The performance of students in the 3 domains, grouped by school category, are normally distributed
+
+-   **H1** = The underlying distributions are not normally distributed
+
+Visually, the points can be observed to be deviating from the normal line, hence the implication is that the underlying distributions might not be normal.
+
+```{r}
+qq_school_math <- ggplot(data = sfu_qqq_SG_req,
+      mapping = aes(sample = PVMATH_final,
+                    fill = STRATUM)) +
+  stat_qq_band(alpha=0.15) +
+  stat_qq_line(alpha=0.15) +
+  stat_qq_point(size=0.5) +
+  facet_wrap(~STRATUM,
+             nrow = 1) +
+  labs(title = "Q-Q plot for Math \nby school category") +
+  theme_linedraw() +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        plot.background = element_rect(),
+        panel.grid = element_blank())
+
+qq_school_read <- ggplot(data = sfu_qqq_SG_req,
+      mapping = aes(sample = PVREAD_final,
+                    fill = STRATUM)) +
+  stat_qq_band(alpha=0.15) +
+  stat_qq_line(alpha=0.15) +
+  stat_qq_point(size=0.5) +
+  facet_wrap(~STRATUM,
+             nrow = 1) +
+  labs(title = "Q-Q plot for Reading \nby school category") +
+  theme_linedraw() +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        plot.background = element_rect(),
+        panel.grid = element_blank())
+
+qq_school_scie <- ggplot(data = sfu_qqq_SG_req,
+      mapping = aes(sample = PVSCIE_final,
+                    fill = STRATUM)) +
+  stat_qq_band(alpha=0.15) +
+  stat_qq_line(alpha=0.15) +
+  stat_qq_point(size=0.5) +
+  facet_wrap(~STRATUM,
+             nrow = 1) +
+  labs(title = "Q-Q plot for Science \nby school category") +
+  theme_linedraw() +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        plot.background = element_rect(),
+        panel.grid = element_blank())
+
+qq_school_math | qq_school_read | qq_school_scie
+```
+
+The Shapiro-Wilk test for normality was used to test and confirm the visual observations above. However, as the number of samples for \"Public Sch\" is larger than 5000 (more than 6000), we will conduct the Shapiro-Wilk test for the \"Private Sch\" distribution, while assuming that that for the \"Public Sch\" are approximately normal (since sample size is large). Consequently, the choice of the subsequent 2-sample test will be dependent on whether the distribution for \"Private Sch\" students are normally distributed.
+
+The code chunks below details outcome of the tests.
+
+```{r}
+math_sw_sch <- sfu_qqq_SG_req %>% 
+  group_by(STRATUM) %>%
+  filter(STRATUM == "Private Sch") %>% 
+  shapiro_test(PVMATH_final)
+
+read_sw_sch <- sfu_qqq_SG_req %>% 
+  group_by(STRATUM) %>%
+  filter(STRATUM == "Private Sch") %>% 
+  shapiro_test(PVREAD_final)
+
+scie_sw_sch <- sfu_qqq_SG_req %>% 
+  group_by(STRATUM) %>%
+  filter(STRATUM == "Private Sch") %>% 
+  shapiro_test(PVSCIE_final)
+
+combined_sw_sch <- rbind(math_sw_sch, read_sw_sch, scie_sw_sch)
+
+datatable(data = combined_sw_sch,
+          rownames = FALSE,
+          options = list(dom = c("t")),
+          style = "bootstrap",
+          caption = "Table showing Shapiro-Wilk normality test results")
+```
+
+Since the p-value for the distributions of Reading and Science performance are lower than the significance level of 0.05 (taking a 95% confidence level), we **reject the null hypothesis (H0) that the underlying distributions are normally distributed**, while we fail to reject the hypothesis that the distribution for Math performance of Private Sch students are normal as the p-value obtained is 0.202 (greater than significance level of 0.05).
+
+The implication is that a non-parametric test will be used in subsequent analysis for Reading and Science, while a parametric test will be used for Math, to test if there is any significant statistical difference in the student\'s performance in the three domains according to their school category.
+
+**2 SAMPLE-TEST (NON-PARAMETRIC):**
+
+Here, we use either the parametric Welch t-test or the non-parametric Wilcoxon rank-sum test with the following pairs of hypotheses using 95% confidence level. The ggbetweenstats function of ggstatsplot package is used for the test, as well as showing the outcome in a visual plot.
+
+Hypothesis 1:
+
+-   H0 = There is no difference in the mean Math performance of Singapore students in different category.
+
+-   H1 = There is a difference in the mean Math performance of Singapore students.
+
+```{r}
+ggbetweenstats(data = sfu_qqq_SG_req,
+               x = STRATUM,
+               y = PVMATH_final,
+               type = "parametric",
+               conf.level = 0.95,
+               ylab = "Math score",
+               xlab = "School Category",
+               title = "2 sample parametric test on Math score by school category") +
+  scale_color_manual(values = c("palegreen", "pink", "black")) +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+The p-value obtained from the 2-sample t-test is lower than significance level of 0.05, thus **rejecting the null hypothesis** that there is no difference in Math performance between school categories. Specifically, private school students had a higher mean than public school students, suggesting that private school students had performed better in Math.
+
+Hypothesis 2:
+
+-   H0 = There is no difference in the median Reading performance of Singapore students by school category.
+
+-   H1 = There is a difference in the median Reading performance of Singapore students.
+
+```{r}
+ggbetweenstats(data = sfu_qqq_SG_req,
+               x = STRATUM,
+               y = PVREAD_final,
+               type = "nonparametric",
+               conf.level = 0.95,
+               ylab = "Reading score",
+               xlab = "School Category",
+               title = "2 sample non-parametric test on Reading score by school category") +
+  scale_color_manual(values = c("palegreen", "pink", "black")) +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+The p-value obtained from the 2-sample non-parametric test is lower than significance level of 0.05, thus **rejecting the null hypothesis** that there is no difference in Reading performance between school categories. Specifically, private school students had a higher median than public school students, suggesting that private school students had performed better in Reading.
+
+Hypothesis 3:
+
+-   H0 = There is no difference in the median Science performance of Singapore students in different school category.
+
+-   H1 = There is a difference in the median Science performance of Singapore students.
+
+```{r}
+ggbetweenstats(data = sfu_qqq_SG_req,
+               x = STRATUM,
+               y = PVSCIE_final,
+               type = "nonparametric",
+               conf.level = 0.95,
+               ylab = "Science score",
+               xlab = "School Category",
+               title = "2 sample non-parametric test on Reading score by school category") +
+  scale_color_manual(values = c("palegreen", "pink", "black")) +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+The p-value obtained from the 2-sample non-parametric test is lower than significance level of 0.05, thus **rejecting the null hypothesis** that there is no difference in Science performance between school categories. Specifically, private school students had a higher median than public school students, suggesting that private school students had performed better in Science.
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DISCUSSIONS & INSIGHTS                                                                                                                                                                                                                                                               |
++======================================================================================================================================================================================================================================================================================+
+| Using the above plots, differences in the distributions across school categories were analysed. The insights are:                                                                                                                                                                    |
+|                                                                                                                                                                                                                                                                                      |
+| 1.  The density ridges for private schools generally has steeper slopes as compared to public schools. From this, we can infer that the differences in performance of public schools varies more, i.e. public schools\' performance are less \"equal\" than that of private schools. |
+|                                                                                                                                                                                                                                                                                      |
+| 2.  In terms of the peak frequency in the density distribution, private school students recorded peak frequencies at lower score for Math, at higher score for Reading and at similar score for Science. Subsequent CDA techniques was used to confirm the observations.             |
+|                                                                                                                                                                                                                                                                                      |
+| 3.  From the histogram plots, it was also observed that the range of school average scores is smaller in private schools than in public schools, suggesting that performance among private schools could be more consistent.                                                         |
+|                                                                                                                                                                                                                                                                                      |
+| 4.  The follow-on 2-sample tests confirmed the rejection of the null hypothesis, and suggests that private school students had better performance in all three domains, contrary to what EDA had initially suggested.                                                                |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## **4.4 Positive correlation between performance and socioeconomic status**
+
+Next, we use scatter plots to visualise correlations between the performance proxy, i.e. the average Plausible Value for each domain, and the socioeconomic status (measured by ESCS index by OECD PISA), so as to see if any hypothesis or insights on possible relationship between socioeconomic status and performance can be derived.
+
+Below are the code chunks for the data visualisation.
+
+```{r}
+library(ggplot2)
+library(patchwork)
+
+# Function to compute correlation and return a formatted annotation string
+get_correlation_annotation <- function(score, escs) {
+  corr_test <- cor.test(score, escs, method = "pearson")
+  paste("r =", round(corr_test$estimate, 3),
+        "\np-value =", format.pval(corr_test$p.value, digits = 3))
+}
+
+# Function to create scatter plot
+create_scatter_plot <- function(data, score_col, score_name, color, annotation) {
+  ggplot(data, aes_string(x = score_col, y = "ESCS")) +
+    geom_point(size = 0.8, alpha = 0.3, color = color) +
+    geom_smooth(method = "lm", linewidth = 0.5, formula = y ~ x) +
+    scale_x_continuous(limits = c(100, 900)) +
+    labs(x = score_name, y = "Socioeconomic index (ESCS)") +
+    annotate("label", x = 500, y = 3.25, label = annotation, size = 2, color = "brown", fill = "lightyellow") +
+    theme_light()
+}
+
+# Compute correlation annotations
+math_annotation <- get_correlation_annotation(sfu_qqq_SG_req$PVMATH_final, sfu_qqq_SG_req$ESCS)
+read_annotation <- get_correlation_annotation(sfu_qqq_SG_req$PVREAD_final, sfu_qqq_SG_req$ESCS)
+scie_annotation <- get_correlation_annotation(sfu_qqq_SG_req$PVSCIE_final, sfu_qqq_SG_req$ESCS)
+
+# Create scatter plots
+math_scatter <- create_scatter_plot(sfu_qqq_SG_req, "PVMATH_final", "Math score", "violet", math_annotation)
+read_scatter <- create_scatter_plot(sfu_qqq_SG_req, "PVREAD_final", "Reading score", "salmon", read_annotation)
+scie_scatter <- create_scatter_plot(sfu_qqq_SG_req, "PVSCIE_final", "Science score", "palegreen", scie_annotation)
+
+# Combine the plots
+fig4 <- math_scatter + read_scatter + scie_scatter +
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
+
+# Add titles to the combined plot
+fig4 + 
+  plot_annotation(
+    title = "Student Performance and Socioeconomic Status Correlation",
+    subtitle = "There is a positive correlation across all domains, suggesting socioeconomic status influences student performance.",
+    theme = theme(plot.title = element_text(hjust = 0.5))
+  )
+
+```
+
+The analysis of the data suggests that students with higher socioeconomic status tend to have higher performance scores across all three academic domains: Math, Reading, and Science. The consistency of the correlation across different domains implies that socioeconomic factors may have a pervasive influence on student performance. Given the high level of statistical significance, it is unlikely that these findings are due to random variation in the data. This implies that socioeconomic status is a strong predictor of academic performance among Singapore students in this dataset. Further analysis, perhaps including multivariate regression or more sophisticated modeling, could provide additional insights into the nature of these relationships.
+
+## **4.5 A look into the details in relationship between performance and components of socioeconomic status**
+
+Finally, we use multiple trellis box plots to investigate into the possible relations between the performance levels, obtained by mapping the average Plausible Value for each domain to performance scales defined by PISA, and the individual components breakdown (i.e. occupation, education and home possessions of parents) of the ESCS index, so as to see if there could be any dominating components that could explain for the observations in 4.4.
+
+Below are the code chunks for the data visualization.
+
+```{r}
+#HISEI index
+math_level_h <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=MATH_level,
+           y=HISEI)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "blue",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = "Math \nperformance",
+       y = NULL) +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 9, color = "grey20"))
+
+read_level_h <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=READ_level,
+           y=HISEI)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "blue",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = "Reading \nperformance",
+       y = NULL) +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.x = element_blank(),
+        axis.title.y = element_text(size = 9, color = "grey20"))
+
+scie_level_h <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=SCIE_level,
+           y=HISEI)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "blue",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = "Science \nperformance",
+       y = "Parent \noccupation index") +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.title.x = element_text(size = 9, color = "grey20"),
+        axis.title.y = element_text(size = 9, color = "grey20"))
+
+# PAREDINT index
+math_level_p <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=MATH_level,
+           y=PAREDINT)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "black",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+
+read_level_p <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=READ_level,
+           y=PAREDINT)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "black",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+
+scie_level_p <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=SCIE_level,
+           y=PAREDINT)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "black",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = NULL,
+       y = "Highest parent \neducation in years") +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.y = element_blank(),
+        axis.title.x = element_text(size = 9, color = "grey20"))
+
+# HOMEPOS index
+math_level_home <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=MATH_level,
+           y=HOMEPOS)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "red",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+
+read_level_home <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=READ_level,
+           y=HOMEPOS)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "red",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+
+scie_level_home <- ggplot(data=sfu_qqq_SG_req,
+       aes(x=SCIE_level,
+           y=HOMEPOS)) + 
+  geom_boxplot(outlier.size = 0.8, 
+               outlier.alpha = 0.6, 
+               outlier.color = "red",
+               fill = "lightblue") + 
+  stat_summary(geom = "point",
+               fun.y = "mean",
+               color = "salmon",
+               size = 1) +
+  labs(x = NULL,
+       y = "Home possessions") +
+  theme_light() + 
+  coord_flip() +
+  theme(axis.text.y = element_blank(),
+        axis.title.x = element_text(size = 9, color = "grey20"))
+
+fig5 <- (math_level_h / read_level_h / scie_level_h) | (math_level_p / read_level_p / scie_level_p) | (math_level_home / read_level_home / scie_level_home)
+
+fig5 + 
+  plot_annotation(title = "Breakdown by Socioeconomic Components", subtitle = "Plots reveal detailed insights: Parents' occupation and home possessions likely the key contributors \nbehind the correlation between performance and socioeconomic status")
+```
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DISCUSSIONS & INSIGHTS                                                                                                                                                                                                                                                      |
++=============================================================================================================================================================================================================================================================================+
+| Using the above plots, possible relationships between performance and the components of ESCS index were analysed. The insights are:                                                                                                                                         |
+|                                                                                                                                                                                                                                                                             |
+| 1.  Parent occupation index:                                                                                                                                                                                                                                                |
+|                                                                                                                                                                                                                                                                             |
+|     -   The means and medians generally increases as performance level increases, with an outlier observed for Science, whereby there was a low performer with high parent occupation index. Despite so, as this is an isolated data point, this could be a rare exception. |
+|                                                                                                                                                                                                                                                                             |
+| 2.  Parent education (in years):                                                                                                                                                                                                                                            |
+|                                                                                                                                                                                                                                                                             |
+|     -   Though the means generally increase slightly with increase in performance, the relationship might not be so clear in this case as the boxplots are mostly overlapping.                                                                                              |
+|                                                                                                                                                                                                                                                                             |
+| 3.  Home possessions:                                                                                                                                                                                                                                                       |
+|                                                                                                                                                                                                                                                                             |
+|     -   The means and medians generally increases as performance level increase. However, the existence of many outliers makes this observation less certain.                                                                                                               |
+|                                                                                                                                                                                                                                                                             |
+| Putting the above observations together, it can be inferred that the more likely contributors behind the correlation identified in 4.4 to be due to parents\' occupation and home possessions, and less by parents\' education.                                             |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+# **5 Conclusion**
+
+**Exploratory Data Analysis (EDA)** methods and [ggplot2](https://ggplot2.tidyverse.org/) data visualisation functions were used to analyse the PISA dataset for Singapore students:
+
+-   the distribution of Singapore students\' performance in mathematics, reading, and science, and
+
+-   the relationship between these performances with schools, gender and socioeconomic status of the students.
+
+From the exploratory analysis done, key insights obtained are as follows:
+
+-   There is likelihood that performance differs between genders, where Male students likely perform better in Maths and Science,
+
+-   Not all schools have performed equally well, with the likelihood that private schools having performed better than public schools,
+
+-   Likelihood of correlation between socioeconomic status and performance, with parents\' occupation and home possessions as possible key contributors to the correlation.
+
+Further exploratory data analysis and confirmatory data analysis techniques can be performed to further analysis and confirm the insights obtained.
+
+# **6 References**
+
+-   <https://www.oecd.org/pisa/data/2022database/>
+
+-   <https://www.oecd.org/pisa/data/pisa2022technicalreport/>
+
+-   <https://www.oecd-ilibrary.org/education/pisa-data-analysis-manual-sas-second-edition_9789264056251-en>
