@@ -15,6 +15,8 @@ website:
             href: Hands_on_Ex3.html
           - text: Hands-on Exercise 3 PASG
             href: Hands_on_Ex3_2.html
+          - text: Hands-on Exercise 4
+            href: Hands_on_Ex4.html
       - text: In-class Exercise
         menu: 
           - text: In-class Exercise 1
