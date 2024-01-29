@@ -17,6 +17,10 @@ website:
             href: Hands_on_Ex3_2.html
           - text: Hands-on Exercise 4
             href: Hands_on_Ex4.html
+          - text: Hands-on Exercise 4 VSA
+            href: Hands_on_Ex4_VSA.html
+          - text: Hands-on Exercise 4 VU
+            href: Hands_on_Ex4_VU.html
       - text: In-class Exercise
         menu: 
           - text: In-class Exercise 1
