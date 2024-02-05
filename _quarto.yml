@@ -27,6 +27,8 @@ website:
             href: Hands_on_Ex5_CTP.html
           - text: Hands-on Exercise 5 VCA
             href: Hands_on_Ex5_VCA.html
+          - text: Hands-on Exercise 5 HVAMD
+            href: Hands_on_Ex5_HVAMD.html
       - text: In-class Exercise
         menu: 
           - text: In-class Exercise 1
