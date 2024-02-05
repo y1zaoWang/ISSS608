@@ -23,6 +23,8 @@ website:
             href: Hands_on_Ex4_VU.html
           - text: Hands-on Exercise 4 FPFFC
             href: Hands_on_Ex4_FPFFC.html
+          - text: Hands-on Exercise 5 CTP
+            href: Hands_on_Ex5_CTP.html
       - text: In-class Exercise
         menu: 
           - text: In-class Exercise 1
