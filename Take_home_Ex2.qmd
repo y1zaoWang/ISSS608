@@ -385,9 +385,9 @@ For further exploratory data analysis, it's essential to consider this imbalance
 
 # **4 Exploratory Data Analysis**
 
-## **4.1 Distribution of Singapore students\' performance in Math, Reading, and Science**
+## **4.1 Distribution of Singapore students' performance in Math, Reading, and Science**
 
-In this section, the raincloud plot is used to provide a visual overview of students\' performances in the three domains. The raincloud plot is a data visualisation technique that provides a half density distribution diagram, and thus is able to provide additional insights, such as the existence of multiple modalities, which could suggests the possibility of groups. Using the raincloud plot, we were able to come up with insights and hypothesis, which could be examined further using CDA techniques.
+In this section, the raincloud plot is used to provide a visual overview of students' performances in the three domains. The raincloud plot is a data visualisation technique that provides a half density distribution diagram, and thus is able to provide additional insights, such as the existence of multiple modalities, which could suggests the possibility of groups. Using the raincloud plot, we were able to come up with insights and hypothesis, which could be examined further using CDA techniques.
 
 Below are the code chunks for this data visualisation:
 
@@ -612,7 +612,7 @@ datatable(data = combined_sw,
           caption = "Table showing Shapiro-Wilk normality test results")
 ```
 
-Since the p-value for all the distributions tested are lower than the significance level of 0.05 (taking a 95% confidence level), we **reject the null hypothesis (H0) that the underlying distributions are normally distributed**. This means that the performance of students (grouped by gender) in all three domains do not follow a normal distribution. This implication is that a non-parametric test will be used in subsequent analysis to test if there is any significant statistical difference in the student\'s performance in the three domains according to their gender.
+Since the p-value for all the distributions tested are lower than the significance level of 0.05 (taking a 95% confidence level), we **reject the null hypothesis (H0) that the underlying distributions are normally distributed**. This means that the performance of students (grouped by gender) in all three domains do not follow a normal distribution. This implication is that a non-parametric test will be used in subsequent analysis to test if there is any significant statistical difference in the student's performance in the three domains according to their gender.
 
 **2 SAMPLE-TEST (NON-PARAMETRIC)**
 
@@ -896,7 +896,7 @@ qq_school_scie <- ggplot(data = sfu_qqq_SG_req,
 qq_school_math | qq_school_read | qq_school_scie
 ```
 
-The Shapiro-Wilk test for normality was used to test and confirm the visual observations above. However, as the number of samples for \"Public Sch\" is larger than 5000 (more than 6000), we will conduct the Shapiro-Wilk test for the \"Private Sch\" distribution, while assuming that that for the \"Public Sch\" are approximately normal (since sample size is large). Consequently, the choice of the subsequent 2-sample test will be dependent on whether the distribution for \"Private Sch\" students are normally distributed.
+The Shapiro-Wilk test for normality was used to test and confirm the visual observations above. However, as the number of samples for "Public Sch" is larger than 5000 (more than 6000), we will conduct the Shapiro-Wilk test for the "Private Sch" distribution, while assuming that that for the "Public Sch" are approximately normal (since sample size is large). Consequently, the choice of the subsequent 2-sample test will be dependent on whether the distribution for "Private Sch" students are normally distributed.
 
 The code chunks below details outcome of the tests.
 
@@ -927,7 +927,7 @@ datatable(data = combined_sw_sch,
 
 Since the p-value for the distributions of Reading and Science performance are lower than the significance level of 0.05 (taking a 95% confidence level), we **reject the null hypothesis (H0) that the underlying distributions are normally distributed**, while we fail to reject the hypothesis that the distribution for Math performance of Private Sch students are normal as the p-value obtained is 0.202 (greater than significance level of 0.05).
 
-The implication is that a non-parametric test will be used in subsequent analysis for Reading and Science, while a parametric test will be used for Math, to test if there is any significant statistical difference in the student\'s performance in the three domains according to their school category.
+The implication is that a non-parametric test will be used in subsequent analysis for Reading and Science, while a parametric test will be used for Math, to test if there is any significant statistical difference in the student's performance in the three domains according to their school category.
 
 **2 SAMPLE-TEST (NON-PARAMETRIC):**
 
@@ -999,19 +999,19 @@ ggbetweenstats(data = sfu_qqq_SG_req,
 
 The p-value obtained from the 2-sample non-parametric test is lower than significance level of 0.05, thus **rejecting the null hypothesis** that there is no difference in Science performance between school categories. Specifically, private school students had a higher median than public school students, suggesting that private school students had performed better in Science.
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| DISCUSSIONS & INSIGHTS                                                                                                                                                                                                                                                               |
-+======================================================================================================================================================================================================================================================================================+
-| Using the above plots, differences in the distributions across school categories were analysed. The insights are:                                                                                                                                                                    |
-|                                                                                                                                                                                                                                                                                      |
-| 1.  The density ridges for private schools generally has steeper slopes as compared to public schools. From this, we can infer that the differences in performance of public schools varies more, i.e. public schools\' performance are less \"equal\" than that of private schools. |
-|                                                                                                                                                                                                                                                                                      |
-| 2.  In terms of the peak frequency in the density distribution, private school students recorded peak frequencies at lower score for Math, at higher score for Reading and at similar score for Science. Subsequent CDA techniques was used to confirm the observations.             |
-|                                                                                                                                                                                                                                                                                      |
-| 3.  From the histogram plots, it was also observed that the range of school average scores is smaller in private schools than in public schools, suggesting that performance among private schools could be more consistent.                                                         |
-|                                                                                                                                                                                                                                                                                      |
-| 4.  The follow-on 2-sample tests confirmed the rejection of the null hypothesis, and suggests that private school students had better performance in all three domains, contrary to what EDA had initially suggested.                                                                |
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DISCUSSIONS & INSIGHTS                                                                                                                                                                                                                                                            |
++===================================================================================================================================================================================================================================================================================+
+| Using the above plots, differences in the distributions across school categories were analysed. The insights are:                                                                                                                                                                 |
+|                                                                                                                                                                                                                                                                                   |
+| 1.  The density ridges for private schools generally has steeper slopes as compared to public schools. From this, we can infer that the differences in performance of public schools varies more, i.e. public schools' performance are less "equal" than that of private schools. |
+|                                                                                                                                                                                                                                                                                   |
+| 2.  In terms of the peak frequency in the density distribution, private school students recorded peak frequencies at lower score for Math, at higher score for Reading and at similar score for Science. Subsequent CDA techniques was used to confirm the observations.          |
+|                                                                                                                                                                                                                                                                                   |
+| 3.  From the histogram plots, it was also observed that the range of school average scores is smaller in private schools than in public schools, suggesting that performance among private schools could be more consistent.                                                      |
+|                                                                                                                                                                                                                                                                                   |
+| 4.  The follow-on 2-sample tests confirmed the rejection of the null hypothesis, and suggests that private school students had better performance in all three domains, contrary to what EDA had initially suggested.                                                             |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ## **4.4 Positive correlation between performance and socioeconomic status**
 
@@ -1262,14 +1262,14 @@ fig5 +
 |                                                                                                                                                                                                                                                                             |
 |     -   The means and medians generally increases as performance level increase. However, the existence of many outliers makes this observation less certain.                                                                                                               |
 |                                                                                                                                                                                                                                                                             |
-| Putting the above observations together, it can be inferred that the more likely contributors behind the correlation identified in 4.4 to be due to parents\' occupation and home possessions, and less by parents\' education.                                             |
+| Putting the above observations together, it can be inferred that the more likely contributors behind the correlation identified in 4.4 to be due to parents' occupation and home possessions, and less by parents' education.                                               |
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 # **5 Conclusion**
 
 **Exploratory Data Analysis (EDA)** methods and [ggplot2](https://ggplot2.tidyverse.org/) data visualisation functions were used to analyse the PISA dataset for Singapore students:
 
--   the distribution of Singapore students\' performance in mathematics, reading, and science, and
+-   the distribution of Singapore students' performance in mathematics, reading, and science, and
 
 -   the relationship between these performances with schools, gender and socioeconomic status of the students.
 
@@ -1279,7 +1279,7 @@ From the exploratory analysis done, key insights obtained are as follows:
 
 -   Not all schools have performed equally well, with the likelihood that private schools having performed better than public schools,
 
--   Likelihood of correlation between socioeconomic status and performance, with parents\' occupation and home possessions as possible key contributors to the correlation.
+-   Likelihood of correlation between socioeconomic status and performance, with parents' occupation and home possessions as possible key contributors to the correlation.
 
 Further exploratory data analysis and confirmatory data analysis techniques can be performed to further analysis and confirm the insights obtained.
 
