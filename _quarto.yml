@@ -33,6 +33,8 @@ website:
             href: Hands_on_Ex5_VMAPCP.html
           - text: Hands-on Exercise 5 TV
             href: Hands_on_Ex5_TV.html
+          - text: Hands-on Exercise 6
+            href: Hands_on_Ex6.html
       - text: In-class Exercise
         menu: 
           - text: In-class Exercise 1
