@@ -13,8 +13,6 @@ website:
             href: Hands_on_Ex2.html
           - text: Hands-on Exercise 3
             href: Hands_on_Ex3.html
-          - text: Hands-on Exercise 3 PASG
-            href: Hands_on_Ex3_2.html
           - text: Hands-on Exercise 4
             href: Hands_on_Ex4.html
           - text: Hands-on Exercise 4 VSA
@@ -35,6 +33,10 @@ website:
             href: Hands_on_Ex5_TV.html
           - text: Hands-on Exercise 6
             href: Hands_on_Ex6.html
+          - text: Hands-on Exercise 9
+            href: Hands_on_Ex9.html
+          - text: Hands-on Exercise 10
+            href: Hands_on_Ex10.html
       - text: In-class Exercise
         menu: 
           - text: In-class Exercise 1
@@ -47,6 +49,10 @@ website:
             href: Take_home_Ex1.html
           - text: Take-home Exercise 2
             href: Take_home_Ex2.html
+          - text: Take-home Exercise 3
+            href: Take_home_Ex3.html
+          - text: Take-home Exercise 4
+            href: Take_home_Ex4.html
     right:
       - href: index.qmd
         text: Home

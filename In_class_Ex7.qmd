@@ -1,0 +1,321 @@
+---
+title: "In Class Exercise 7"
+---
+
+# **In-class Exercise 7**
+
+```{r}
+pacman::p_load(sf, terra, gstat, automap,
+               tmap, viridis, tidyverse)
+```
+
+## **The Data**
+
+### **Importing rainfall station data**
+
+```{r}
+rfstations <- read_csv("In-class_Ex07/data/aspatial/RainfallStation.csv")
+```
+
+### **Importing rainfall record data**
+
+In the code chunk below, `read_csv()` of **readr** package is used to import DAILYDATA_202402.csv. rfdata, the output object is in tibble data.frame format.
+
+```{r}
+rfdata <- read_csv("In-class_Ex07/data/aspatial/DAILYDATA_202402.csv") %>%
+  select(c(1, 5)) %>%
+  group_by(Station) %>%
+  summarise(MONTHSUM = sum(`Daily Rainfall Total (mm)`)) %>%
+  ungroup()
+```
+
+### **Converting aspatial data into geospatial data**
+
+Next, `left_join()` of *dplyr* is used to join *rfstations* to *rfdata* by using the code chunk below.
+
+```{r}
+rfdata <- rfdata %>%
+  left_join(rfstations)
+```
+
+In the code chunk below, `st_as_sf()` of **sf** package is used to convert *rfdata* into a simple feature data.frame object called *rfdata_sf*.
+
+```{r}
+rfdata_sf <- st_as_sf(rfdata, 
+                      coords = c("Longitude",
+                                 "Latitude"),
+                      crs= 4326) %>%
+  st_transform(crs = 3414)
+```
+
+### **Importing planning subzone boundary data**
+
+In the code chunk below, `st_read()` of sf package is used to import MPSZ-2019 shapefile into R. The output is called *mpsz2019*. It is in polygon feature tibble data.frame format.
+
+```{r}
+mpsz2019 <- st_read(dsn = "In-class_Ex07/data/geospatial", 
+                    layer = "MPSZ-2019") %>%
+  st_transform(crs = 3414)
+```
+
+### **Visualising the data prepared**
+
+It is always a good practice to visualise the data prepared. In the code chunk below, tmap functions are used to create a dot map showing locations of rainfall station in Singapore.
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tmap_mode("view")
+tm_shape(rfdata_sf) +
+  tm_dots(col = "red")
+```
+
+```{r}
+tmap_mode("plot")
+```
+
+In the code chunk below, tmap functions are used to create a quantitative dot map of rainfall distribution by rainfall station in Singaspore.
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tmap_mode("view")
+tm_shape(mpsz2019) +
+  tm_borders() +
+tm_shape(rfdata_sf) +
+  tm_dots(col = 'MONTHSUM')
+```
+
+```{r}
+tmap_mode("plot")
+```
+
+## **Spatial Interpolation: gstat method**
+
+In this section, you will gain hands-on experience on performing spatial interpolation by using **gstat** package. In order to perform spatial interpolation by using gstat, we first need to create an object of class called *gstat*, using a function of the same name: `gstat`. A gstat object contains all necessary information to conduct spatial interpolation, namely:
+
+-   The model definition
+
+-   The calibration data
+
+Based on its arguments, the gstat function "understands" what type of interpolation model we want to use:
+
+-   No variogram model → IDW
+
+-   Variogram model, no covariates → Ordinary Kriging
+
+-   Variogram model, with covariates → Universal Kriging
+
+The complete decision tree of `gstat`, including several additional methods which we are not going to use, is shown in the figure below.
+
+### **Data preparation**
+
+To getting start, we need create a grid data object by using `rast()` of **terra** package as shown in the cod chunk below.
+
+```{r}
+grid <- terra::rast(mpsz2019, 
+                    nrows = 690, 
+                    ncols = 1075)
+grid
+```
+
+```{r}
+xy <- terra::xyFromCell(grid, 
+                        1:ncell(grid))
+head(xy)
+```
+
+Lastly, we will create a data frame called *coop* with prediction/simulation locations by using the code chunk below.
+
+```{r}
+coop <- st_as_sf(as.data.frame(xy), 
+                 coords = c("x", "y"),
+                 crs = st_crs(mpsz2019))
+coop <- st_filter(coop, mpsz2019)
+head(coop)
+```
+
+## **Inverse Distance Weighted (IDW)**
+
+```{r}
+res <- gstat(formula = MONTHSUM ~ 1, 
+             locations = rfdata_sf, 
+             nmax = 5,
+             set = list(idp = 0))
+```
+
+Now that our model is defined, we can use `predict()` to actually interpolate, i.e., to calculate predicted values. The predict function accepts:
+
+-   A raster---stars object, such as dem
+
+-   A model---gstat object, such as g
+
+The raster serves for two purposes:
+
+-   Specifying the locations where we want to make predictions (in all methods), and
+
+-   Specifying covariate values (in Universal Kriging only).
+
+```{r}
+resp <- predict(res, coop)
+```
+
+```{r}
+resp$x <- st_coordinates(resp)[,1]
+resp$y <- st_coordinates(resp)[,2]
+resp$pred <- resp$var1.pred
+
+pred <- terra::rasterize(resp, grid, 
+                         field = "pred", 
+                         fun = "mean")
+```
+
+Now, we will map the interpolated surface by using tmap functions as shown in the code chunk below.
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tmap_mode("plot")
+tm_shape(pred) + 
+  tm_raster(alpha = 0.6, 
+            palette = "viridis")
+```
+
+## **Kriging**
+
+### **Working with gstat**
+
+Firstly, we will calculate and examine the empirical variogram by using `variogram()` of **gstat** package. The function requires two arguments:
+
+-   formula, the dependent variable and the covariates (same as in gstat, see Section 12.2.1)
+
+-   data, a point layer with the dependent variable and covariates as attributes
+
+as shown in the code chunk below.
+
+```{r}
+v <- variogram(MONTHSUM ~ 1, 
+               data = rfdata_sf)
+plot(v)
+```
+
+With reference to the comparison above, am empirical variogram model will be fitted by using `fit.variogram()` of **gstat** package as shown in the code chunk below.
+
+```{r}
+fv <- fit.variogram(object = v,
+                    model = vgm(
+                      psill = 0.5, 
+                      model = "Sph",
+                      range = 5000, 
+                      nugget = 0.1))
+fv
+```
+
+We can visualise how well the observed data fit the model by plotting *fv* using the code chunk below.
+
+```{r}
+plot(v, fv)
+```
+
+The plot above reveals that the empirical model fits rather well. In view of this, we will go ahead to perform spatial interpolation by using the newly derived model as shown in the code chunk below.
+
+```{r}
+k <- gstat(formula = MONTHSUM ~ 1, 
+           data = rfdata_sf, 
+           model = fv)
+k
+```
+
+Once we are happy with the results, predict() of gstat package will be used to estimate the unknown grids by using the code chunk below.
+
+```{r}
+resp <- predict(k, coop)
+```
+
+```{r}
+resp$x <- st_coordinates(resp)[,1]
+resp$y <- st_coordinates(resp)[,2]
+resp$pred <- resp$var1.pred
+resp$pred <- resp$pred
+resp
+```
+
+In order to create a raster surface data object, rasterize() of terra is used as shown in the code chunk below.
+
+```{r}
+kpred <- terra::rasterize(resp, grid, 
+                         field = "pred")
+kpred
+```
+
+### **Mapping the interpolated rainfall raster**
+
+Finally, tmap functions are used to map the interpolated rainfall raster (i.e. kpred) by using the code chunk below.
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tmap_mode("plot")
+tm_shape(kpred) + 
+  tm_raster(alpha = 0.6, 
+            palette = "viridis",
+            title = "Total monthly rainfall (mm)") +
+  tm_layout(main.title = "Distribution of monthly rainfall, Feb 2024",
+            main.title.position = "center",
+            main.title.size = 1.2,
+            legend.height = 0.45, 
+            legend.width = 0.35,
+            frame = TRUE) +
+  tm_compass(type="8star", size = 2) +
+  tm_scale_bar() +
+  tm_grid(alpha =0.2)
+```
+
+### **Automatic variogram modelling**
+
+Beside using gstat to perform variogram modelling manually, `autofirVariogram()` of [**automap**](https://cran.r-project.org/web/packages/automap/) package can be used to perform varigram modelling as shown in the code chunk below.
+
+```{r}
+v_auto <- autofitVariogram(MONTHSUM ~ 1, 
+                           rfdata_sf)
+plot(v_auto)
+```
+
+```{r}
+v_auto
+```
+
+```{r}
+k <- gstat(formula = MONTHSUM ~ 1, 
+           model = v_auto$var_model,
+           data = rfdata_sf)
+k
+```
+
+```{r}
+resp <- predict(k, coop)
+```
+
+```{r}
+resp$x <- st_coordinates(resp)[,1]
+resp$y <- st_coordinates(resp)[,2]
+resp$pred <- resp$var1.pred
+resp$pred <- resp$pred
+
+kpred <- terra::rasterize(resp, grid, 
+                         field = "pred")
+```
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tmap_mode("plot")
+tm_shape(kpred) + 
+  tm_raster(alpha = 0.6, 
+            palette = "viridis",
+            title = "Total monthly rainfall (mm)") +
+  tm_layout(main.title = "Distribution of monthly rainfall, Feb 2024",
+            main.title.position = "center",
+            main.title.size = 1.2,
+            legend.height = 0.45, 
+            legend.width = 0.35,
+            frame = TRUE) +
+  tm_compass(type="8star", size = 2) +
+  tm_scale_bar() +
+  tm_grid(alpha =0.2)
+```

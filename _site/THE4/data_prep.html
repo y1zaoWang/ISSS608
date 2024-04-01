@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ISSS624 - Prototyping</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ISSS624</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Hands-on Exercises</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercises">    
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex1.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex2.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex3.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex4.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex4_VSA.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 4 VSA</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex4_VU.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 4 VU</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex4_FPFFC.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 4 FPFFC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex5_CTP.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 CTP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex5_VCA.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 VCA</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex5_HVAMD.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 HVAMD</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex5_VMAPCP.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 VMAPCP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex5_TV.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 TV</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex6.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex9.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Hands_on_Ex10.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 10</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../In_class_Ex1.html" rel="" target="">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../In_class_Ex2.html" rel="" target="">
+ <span class="dropdown-text">In-class Exercise 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../Take_home_Ex1.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Take_home_Ex2.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Take_home_Ex3.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Take_home_Ex4.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="dropdown-header">
+ <span class="menu-text">about.qmd</span></li>
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#check-structure-with-glimpse" id="toc-check-structure-with-glimpse" class="nav-link active" data-scroll-target="#check-structure-with-glimpse">Check structure with <code>glimpse()</code></a></li>
+  <li><a href="#filter-dataset-for-desired-period" id="toc-filter-dataset-for-desired-period" class="nav-link" data-scroll-target="#filter-dataset-for-desired-period">Filter dataset for desired period</a></li>
+  <li><a href="#drop-unused-columns" id="toc-drop-unused-columns" class="nav-link" data-scroll-target="#drop-unused-columns">Drop unused columns</a></li>
+  <li><a href="#remove-rows-for-specific-stations" id="toc-remove-rows-for-specific-stations" class="nav-link" data-scroll-target="#remove-rows-for-specific-stations">Remove rows for specific Stations</a></li>
+  <li><a href="#check-for-duplicates" id="toc-check-for-duplicates" class="nav-link" data-scroll-target="#check-for-duplicates">Check for duplicates</a></li>
+  <li><a href="#check-and-handle-missing-values" id="toc-check-and-handle-missing-values" class="nav-link" data-scroll-target="#check-and-handle-missing-values">Check and handle missing values</a>
+  <ul class="collapse">
+  <li><a href="#first-check-for-missing-values" id="toc-first-check-for-missing-values" class="nav-link" data-scroll-target="#first-check-for-missing-values">First check for missing values</a></li>
+  <li><a href="#remove-stations-with-significant-missing-data" id="toc-remove-stations-with-significant-missing-data" class="nav-link" data-scroll-target="#remove-stations-with-significant-missing-data">Remove Stations with significant missing data</a></li>
+  </ul></li>
+  <li><a href="#summary-of-cleaned-data" id="toc-summary-of-cleaned-data" class="nav-link" data-scroll-target="#summary-of-cleaned-data">Summary of cleaned data</a>
+  <ul class="collapse">
+  <li><a href="#details-of-stations-and-time-period-of-data" id="toc-details-of-stations-and-time-period-of-data" class="nav-link" data-scroll-target="#details-of-stations-and-time-period-of-data">Details of stations and time period of data</a></li>
+  <li><a href="#check-structure-with-glimpse-1" id="toc-check-structure-with-glimpse-1" class="nav-link" data-scroll-target="#check-structure-with-glimpse-1">Check structure with <code>glimpse()</code></a></li>
+  <li><a href="#view-dataset-as-interactive-table" id="toc-view-dataset-as-interactive-table" class="nav-link" data-scroll-target="#view-dataset-as-interactive-table">View dataset as interactive table</a></li>
+  </ul></li>
+  <li><a href="#save-cleaned-data-to-.rds" id="toc-save-cleaned-data-to-.rds" class="nav-link" data-scroll-target="#save-cleaned-data-to-.rds">Save cleaned data to .rds</a></li>
+  <li><a href="#import-cleaned-data" id="toc-import-cleaned-data" class="nav-link" data-scroll-target="#import-cleaned-data">Import cleaned data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Prototyping</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar, imputeTS, DT, knitr, lubridate,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               ggplot2, patchwork, ggthemes,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tseries, ggHoriPlot,dplyr,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               TSclust, fable, dtwclust, dendextend,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               ggraph, plotly, factoextra, ggdendrosf,terra,gstat,tmap,viridis,tidyverse,dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/Yizao/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/src/contrib:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggdendrosf' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.3:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 'BiocManager' not available.  Could not check Bioconductor.
+
+Please use `install.packages('BiocManager')` and then retry.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in p_install(package, character.only = TRUE, ...):</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+logical.return = TRUE, : there is no package called 'ggdendrosf'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/Yizao/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/src/contrib:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.3:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>package 'tmap' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+    C:\Users\Yizao\AppData\Local\Temp\Rtmp0qHXdc\downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+tmap installed</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tmap' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pacman::p_load(tidyverse, naniar, imputeTS, DT, knitr, lubridate, : Failed to install/load:
+ggdendrosf, tmap</code></pre>
+</div>
+</div>
+<p>import data:</p>
+<p>import the merged data of all the stations across 10 years (2014-2023)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rfdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'data/merged_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Import the data that includes the latitude and longitude of the weather stations in Singapore.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rfstation <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'data/RainfallStation.csv'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rfstation <span class="ot">&lt;-</span> rfstation <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Station =</span> Station.Code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Join the latitude and longitude to the rfdata, so that in the analysis part we can map the geospatial analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>raw_weather_data <span class="ot">&lt;-</span> rfdata  <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(rfstation, <span class="at">by =</span> <span class="st">"Station"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>his dataset was retrieved from the <a href="http://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Singapore</a> site, and had some basic <a href="https://isss608-airweatheranalytics.netlify.app/code/data_retrieval">pre-processing steps performed in python</a> due to the large amount of files:</p>
+<ul>
+<li><p>Combine all downloaded CSV files into one dataframe.</p></li>
+<li><p>Performing cleaning to merge data of columns with slightly different names due to case sensitivity (e.g., “min” vs.&nbsp;“Min”)</p></li>
+<li><p>(‘Highest 30 <strong>Min</strong> Rainfall (mm)’, ‘Highest 30 <strong>min</strong> Rainfall (mm)’)</p></li>
+<li><p>(‘Highest 60 <strong>Min</strong> Rainfall (mm)’, ‘Highest 60 <strong>min</strong> Rainfall (mm)’)</p></li>
+<li><p>(‘Highest 120 <strong>Min</strong> Rainfall (mm)’, ‘Highest 120 <strong>min</strong> Rainfall (mm)’)</p></li>
+<li><p>Add the latitude and longitude of each station to the dataframe.</p></li>
+</ul>
+<section id="check-structure-with-glimpse" class="level2">
+<h2 class="anchored" data-anchor-id="check-structure-with-glimpse">Check structure with <code>glimpse()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw_weather_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 204,464
+Columns: 15
+$ Station                       &lt;chr&gt; "Paya Lebar", "Paya Lebar", "Paya Lebar"…
+$ Year                          &lt;int&gt; 2014, 2014, 2014, 2014, 2014, 2014, 2014…
+$ Month                         &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ Day                           &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1…
+$ Daily.Rainfall.Total..mm.     &lt;chr&gt; "0", "0", "2.2", "0.6", "10.5", "31.2", …
+$ Highest.30.min.Rainfall..mm.  &lt;chr&gt; "�", "�", "�", "�", "�", "�", "�", "�", …
+$ Highest.60.min.Rainfall..mm.  &lt;chr&gt; "�", "�", "�", "�", "�", "�", "�", "�", …
+$ Highest.120.min.Rainfall..mm. &lt;chr&gt; "�", "�", "�", "�", "�", "�", "�", "�", …
+$ Mean.Temperature...C.         &lt;chr&gt; "�", "�", "�", "�", "�", "�", "�", "�", …
+$ Maximum.Temperature...C.      &lt;chr&gt; "29.5", "31.7", "31.1", "32.3", "27", "2…
+$ Minimum.Temperature...C.      &lt;chr&gt; "24.8", "25", "25.1", "23.7", "23.8", "2…
+$ Mean.Wind.Speed..km.h.        &lt;chr&gt; "15.8", "16.5", "14.9", "8.9", "11.9", "…
+$ Max.Wind.Speed..km.h.         &lt;chr&gt; "35.3", "37.1", "33.5", "35.3", "33.5", …
+$ Latitude                      &lt;dbl&gt; 1.3524, 1.3524, 1.3524, 1.3524, 1.3524, …
+$ Longitude                     &lt;dbl&gt; 103.9007, 103.9007, 103.9007, 103.9007, …</code></pre>
+</div>
+</div>
+<p>There are 204464 rows, and 15 columns in the dataset. In the next few steps, we will drop specific columns and rows based on the project focus.</p>
+</section>
+<section id="filter-dataset-for-desired-period" class="level2">
+<h2 class="anchored" data-anchor-id="filter-dataset-for-desired-period">Filter dataset for desired period</h2>
+<p>While the dataset contains 10 years of data from 2014 to 2023, we will focus on the most recent dataset for a 3 year period, from <strong>2021 to 2024</strong>. This period was chosen to maximise the overall availability of data across the stations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>raw_weather_data <span class="ot">&lt;-</span> raw_weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The dataset covers the period from"</span>, <span class="fu">min</span>(raw_weather_data<span class="sc">$</span>Year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">"to"</span>, <span class="fu">max</span>(raw_weather_data<span class="sc">$</span>Year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">"."</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The dataset covers the period from 2021 to 2024 ."</code></pre>
+</div>
+</div>
+</section>
+<section id="drop-unused-columns" class="level2">
+<h2 class="anchored" data-anchor-id="drop-unused-columns">Drop unused columns</h2>
+<p>We will not be using all 15 columns for this project. The following columns will be dropped:</p>
+<ul>
+<li><p><code>Highest 30 Min Rainfall (mm)</code></p></li>
+<li><p><code>Highest 60 Min Rainfall (mm)</code></p></li>
+<li><p><code>Highest 1200 Min Rainfall (mm)</code></p></li>
+<li><p><code>Mean Wind Speed (km/h)</code></p></li>
+<li><p><code>Max Wind Speed (km/h)</code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop columns</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>raw_weather_data <span class="ot">&lt;-</span> raw_weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Highest.30.min.Rainfall..mm.</span><span class="st">`</span>, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest.60.min.Rainfall..mm.</span><span class="st">`</span>, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Highest.120.min.Rainfall..mm.</span><span class="st">`</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Mean.Wind.Speed..km.h.</span><span class="st">`</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Max.Wind.Speed..km.h.</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="remove-rows-for-specific-stations" class="level2">
+<h2 class="anchored" data-anchor-id="remove-rows-for-specific-stations">Remove rows for specific Stations</h2>
+<p>The Meteorological Service Singapore also provides a file, <a href="http://www.weather.gov.sg/wp-content/uploads/2022/06/Station_Records.pdf">Station Records</a> that has some information on the availability of data for each station. After examining the station records file, we found that 41 stations had missing information for some variables. We will hence drop rows for these stations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows of 41 stations</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the station names to remove</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>stations_to_remove <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Macritchie Reservoir"</span>, <span class="st">"Lower Peirce Reservoir"</span>, <span class="st">"Pasir Ris (West)"</span>, <span class="st">"Kampong Bahru"</span>, <span class="st">"Jurong Pier"</span>, <span class="st">"Ulu Pandan"</span>, <span class="st">"Serangoon"</span>, <span class="st">"Jurong (East)"</span>, <span class="st">"Mandai"</span>, <span class="st">"Upper Thomson"</span>, <span class="st">"Buangkok"</span>, <span class="st">"Boon Lay (West)"</span>, <span class="st">"Bukit Panjang"</span>, <span class="st">"Kranji Reservoir"</span>, <span class="st">"Tanjong Pagar"</span>, <span class="st">"Admiralty West"</span>, <span class="st">"Queenstown"</span>, <span class="st">"Tanjong Katong"</span>, <span class="st">"Chai Chee"</span>, <span class="st">"Upper Peirce Reservoir"</span>, <span class="st">"Kent Ridge"</span>, <span class="st">"Somerset (Road)"</span>, <span class="st">"Punggol"</span>, <span class="st">"Tuas West"</span>, <span class="st">"Simei"</span>, <span class="st">"Toa Payoh"</span>, <span class="st">"Tuas"</span>, <span class="st">"Bukit Timah"</span>, <span class="st">"Yishun"</span>, <span class="st">"Buona Vista"</span>, <span class="st">"Pasir Ris (Central)"</span>, <span class="st">"Jurong (North)"</span>, <span class="st">"Choa Chu Kang (West)"</span>, <span class="st">"Serangoon North"</span>, <span class="st">"Lim Chu Kang"</span>, <span class="st">"Marine Parade"</span>, <span class="st">"Choa Chu Kang (Central)"</span>, <span class="st">"Dhoby Ghaut"</span>, <span class="st">"Nicoll Highway"</span>, <span class="st">"Botanic Garden"</span>, <span class="st">"Whampoa"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with the specified station names</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>raw_weather_data <span class="ot">&lt;-</span> raw_weather_data[<span class="sc">!</span>raw_weather_data<span class="sc">$</span>Station <span class="sc">%in%</span> stations_to_remove, ]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the number of stations left</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">"There were %d stations removed.There are %d stations left."</span>, <span class="fu">length</span>(stations_to_remove), <span class="fu">n_distinct</span>(raw_weather_data<span class="sc">$</span>Station)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "There were 41 stations removed.There are 21 stations left."</code></pre>
+</div>
+</div>
+</section>
+<section id="check-for-duplicates" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-duplicates">Check for duplicates</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify duplicates</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> raw_weather_data[<span class="fu">duplicated</span>(raw_weather_data[<span class="fu">c</span>(<span class="st">"Station"</span>, <span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>)]) <span class="sc">|</span> <span class="fu">duplicated</span>(raw_weather_data[<span class="fu">c</span>(<span class="st">"Station"</span>, <span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>)], <span class="at">fromLast =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if 'duplicates' dataframe is empty</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(duplicates) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"The combination of Station Name, Year, Month, and Day is unique."</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"There are duplicates in the combination of Station Name, Year, Month, and Day. Showing duplicated rows:"</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(duplicates)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The combination of Station Name, Year, Month, and Day is unique."</code></pre>
+</div>
+</div>
+</section>
+<section id="check-and-handle-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="check-and-handle-missing-values">Check and handle missing values</h2>
+<section id="first-check-for-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="first-check-for-missing-values">First check for missing values</h3>
+<p>Missing values in this dataset can be represented by:</p>
+<ul>
+<li><p><code>\u0097</code></p></li>
+<li><p><code>NA</code></p></li>
+<li><p><code>-</code></p></li>
+</ul>
+<p>We first replace these values with actual NA values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>raw_weather_data <span class="ot">&lt;-</span> raw_weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">na_if</span>(.x, <span class="st">"\u0097"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">na_if</span>(.x, <span class="st">"NA"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">na_if</span>(.x, <span class="st">"-"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we visualize the missing values in the dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(raw_weather_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_prep_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We will take steps to handle the missing data.</p>
+</section>
+<section id="remove-stations-with-significant-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="remove-stations-with-significant-missing-data">Remove Stations with significant missing data</h3>
+<p>We have identified two checks to make:</p>
+<ul>
+<li><p>Check which stations have no recorded data for entire months.</p></li>
+<li><p>Check which stations have more than 7 consecutive days of missing data</p></li>
+</ul>
+<p>For both these checks, we will remove the entire station from the dataset as it would not be practical to impute such large amounts of missing values.</p>
+<section id="identify-and-remove-stations-with-no-recorded-data-for-entire-months" class="level4">
+<h4 class="anchored" data-anchor-id="identify-and-remove-stations-with-no-recorded-data-for-entire-months"><strong>Identify and remove Stations with no recorded data for entire months</strong></h4>
+<p>Some stations have no recorded data for entire months, as summarised in the table below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create complete combination of Station, Year, and Month</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>all_combinations <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Station =</span> <span class="fu">unique</span>(raw_weather_data<span class="sc">$</span>Station),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> <span class="dv">2021</span><span class="sc">:</span><span class="dv">2023</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join this with the original weather data to identify missing entries</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>missing_months <span class="ot">&lt;-</span> all_combinations <span class="sc">%&gt;%</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(raw_weather_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Station"</span>, <span class="st">"Year"</span>, <span class="st">"Month"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use is.na() to check for rows that didn't have a match in the original data</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(Day)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select only the relevant columns for the final output</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Station, Year, Month)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a summary table that lists out the missing months</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>missing_months_summary <span class="ot">&lt;-</span> missing_months <span class="sc">%&gt;%</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Station, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MissingMonths =</span> <span class="fu">toString</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(Month))), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(missing_months_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Station</th>
+<th style="text-align: right;">Year</th>
+<th style="text-align: left;">MissingMonths</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Khatib</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: left;">1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Khatib</td>
+<td style="text-align: right;">2023</td>
+<td style="text-align: left;">1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We hence drop these stations from our dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>raw_weather_data <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(raw_weather_data, missing_months, <span class="at">by =</span> <span class="st">"Station"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">"The folowing %d stations were dropped: %s"</span>, <span class="fu">n_distinct</span>(missing_months<span class="sc">$</span>Station), <span class="fu">paste</span>(<span class="fu">unique</span>(missing_months<span class="sc">$</span>Station), <span class="at">collapse =</span> <span class="st">", "</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The folowing 1 stations were dropped: Khatib"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">"There are %d stations left: "</span>, <span class="fu">n_distinct</span>(raw_weather_data<span class="sc">$</span>Station)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "There are 20 stations left: "</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">unique</span>(raw_weather_data<span class="sc">$</span>Station),</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">row.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="st">"Station"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"List of Remaining Stations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>List of Remaining Stations</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Station</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Paya Lebar</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Semakau Island</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Admiralty</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Pulau Ubin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">East Coast Parkway</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Marina Barrage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Ang Mo Kio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Jurong Island</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Newton</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">Tuas South</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">Pasir Panjang</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">Choa Chu Kang (South)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">Tengah</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">Seletar</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Changi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">Tai Seng</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">Jurong (West)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">Clementi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">Sentosa Island</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Sembawang</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="summary-of-cleaned-data" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-cleaned-data">Summary of cleaned data</h2>
+<section id="details-of-stations-and-time-period-of-data" class="level3">
+<h3 class="anchored" data-anchor-id="details-of-stations-and-time-period-of-data">Details of stations and time period of data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">"There are %d stations: "</span>, <span class="fu">n_distinct</span>(raw_weather_data<span class="sc">$</span>Station)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "There are 20 stations: "</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">unique</span>(raw_weather_data<span class="sc">$</span>Station),</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">row.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="st">"Station"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"List of Stations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>List of Stations</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Station</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Paya Lebar</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Semakau Island</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Admiralty</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Pulau Ubin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">East Coast Parkway</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Marina Barrage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Ang Mo Kio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Jurong Island</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Newton</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">Tuas South</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">Pasir Panjang</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">Choa Chu Kang (South)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">Tengah</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">Seletar</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Changi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">Tai Seng</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">Jurong (West)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">Clementi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">Sentosa Island</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Sembawang</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="check-structure-with-glimpse-1" class="level3">
+<h3 class="anchored" data-anchor-id="check-structure-with-glimpse-1">Check structure with <code>glimpse()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw_weather_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 22,520
+Columns: 10
+$ Station                   &lt;chr&gt; "Paya Lebar", "Paya Lebar", "Paya Lebar", "P…
+$ Year                      &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 20…
+$ Month                     &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, …
+$ Day                       &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1…
+$ Daily.Rainfall.Total..mm. &lt;chr&gt; "6.8", "7.2", "14.2", "3", "36.4", "4.8", "1…
+$ Mean.Temperature...C.     &lt;chr&gt; "27.7", "27.3", "26.4", "26.5", "26.6", "26.…
+$ Maximum.Temperature...C.  &lt;chr&gt; "33.8", "33.5", "32.8", "30.4", "30", "32.9"…
+$ Minimum.Temperature...C.  &lt;chr&gt; "24.4", "24", "23.3", "24.2", "23.7", "24.8"…
+$ Latitude                  &lt;dbl&gt; 1.3524, 1.3524, 1.3524, 1.3524, 1.3524, 1.35…
+$ Longitude                 &lt;dbl&gt; 103.9007, 103.9007, 103.9007, 103.9007, 103.…</code></pre>
+</div>
+</div>
+</section>
+<section id="view-dataset-as-interactive-table" class="level3">
+<h3 class="anchored" data-anchor-id="view-dataset-as-interactive-table">View dataset as interactive table</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>monsumdata <span class="ot">&lt;-</span> raw_weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Daily.Rainfall.Total..mm.</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, <span class="st">`</span><span class="at">Daily.Rainfall.Total..mm.</span><span class="st">`</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>monsumdata <span class="ot">&lt;-</span> monsumdata <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Station, Latitude, Longitude) <span class="sc">%&gt;%</span>  <span class="co"># grouping by Station, Year, and Month if you want monthly sums</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MONTHSUM =</span> <span class="fu">sum</span>(Daily.Rainfall.Total..mm., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Station', 'Latitude'. You can override
+using the `.groups` argument.</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="save-cleaned-data-to-.rds" class="level2">
+<h2 class="anchored" data-anchor-id="save-cleaned-data-to-.rds">Save cleaned data to .rds</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(monsumdata, <span class="st">"data/monsumdata.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import-cleaned-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-cleaned-data">Import cleaned data</h2>
+<p>The below code can be used to import the cleaned data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/monsumdata.rds"</span>) </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># weather_data &lt;- read_rds("data/monsumdata.rds") </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

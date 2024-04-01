@@ -1,0 +1,578 @@
+---
+title: "Take home Exercise 7"
+---
+
+# **Take Home Exercise 3: Be Weatherwise or Otherwise**
+
+## **1 Overview**
+
+According to an office report as shown in the infographic below,
+
+-   Daily mean temperature are projected to increase by 1.4 to 4.6, and
+
+-   The contrast between the wet months (November to January) and dry month (February and June to September) is likely to be more pronounced.
+
+## **2 Objective**
+
+-   Select a weather station and download [historical daily temperature or rainfall data](http://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website,
+
+-   Select either daily temperature or rainfall records of a month of the year 1983, 1993, 2003, 2013 and 2023 and create an analytics-driven data visualisation,
+
+-   Apply appropriate interactive techniques to enhance the user experience in data discovery and/or visual story-telling.
+
+## **3 Data Preparation**
+
+### **3.1 Loading R packages**
+
+In this exercise, four R packages will be used. They are:
+
+1.  **`readr`**: Used for reading and importing CSV files. Functions like **`read_csv`** are part of the **`readr`** package.
+
+2.  **`dplyr`**: Used for data manipulation and analysis. Functions like **`bind_rows`**, **`select`**, **`group_by`**, and **`summarize`** are part of the **`dplyr`** package.
+
+3.  **`ggplot2`**: Used for creating static and dynamic (with **`ggplotly`**) plots and visualizations.
+
+4.  **`plotly`**: Used for creating interactive plots and visualizations. Functions like **`plot_ly`** and **`ggplotly`** are part of the **`plotly`** package.
+
+```{r}
+pacman::p_load(tidyverse, lubridate, janitor, fs,
+               knitr, kableExtra, DT, 
+               plotly, ggiraph,
+               ggridges, gganimate, patchwork)
+```
+
+### **3.2 Importing data**
+
+In this exercise, we will be working with the daily rainfall records for the month of July in the years 1983, 1993, 2003, 2013, and 2023 in the area of Changi. We will import the data for these five years using the `"read.csv"` function.
+
+```{r}
+# Get the list of filenames
+filenames <- fs::dir_ls("D:/y1zaoWang/ISSS608/THE3/data/") 
+
+# Read all files and clean the column names
+data <- filenames %>%
+  map_df(~ read_csv(.x, 
+                    locale = locale(encoding = "latin1"),
+                    col_types = cols(.default = "character")
+                    ) %>% 
+           janitor::clean_names()
+  ) 
+
+glimpse(data)
+```
+
+```{r}
+# Patch in results using the second set of temperature variables
+data$mean_temperature_c <- coalesce(data$mean_temperature_c, data$mean_temperature_a_c)
+data$maximum_temperature_c <- coalesce(data$maximum_temperature_c, data$maximum_temperature_a_c)
+data$minimum_temperature_c <- coalesce(data$minimum_temperature_c, data$minimum_temperature_a_c)
+
+# Remove the now-redundant second set of temperature variables
+data %>% 
+  select(-c("mean_temperature_a_c", "maximum_temperature_a_c", "minimum_temperature_a_c"))
+```
+
+By examining the variable names, we observe that the variable names are consistent across all tables. Consequently, we can merge the data from all five tables into a single unified dataset by using `bind_rows`.
+
+```{r}
+glimpse(data)
+```
+
+It is evident that numerous variables contain NA values. We will exclude the variables with NA values, and as this exercise focuses solely on the variation in rainfall, we will remove temperature-related variables. The remaining variables will be renamed appropriately.
+
+```{r}
+dailytemp <- data %>% 
+  select(station, year, month, day, mean_temperature_c, maximum_temperature_c, minimum_temperature_c) %>% 
+  mutate(station = as.factor(station),
+         date = make_date(year = year, month = month, day = day),
+         year = factor(year(date), 
+                       ordered = TRUE, 
+                       levels = c("1983", "1993", "2003", "2013", "2023")),
+         month = lubridate::month(date, label = TRUE),         
+         day = day(date),
+         mean_temperature_c = as.numeric(mean_temperature_c), 
+         maximum_temperature_c = as.numeric(maximum_temperature_c), 
+         minimum_temperature_c = as.numeric(minimum_temperature_c)) 
+```
+
+We will merge the columns for year, month, and day into a new column with a date format. Retain the original year, month, and day columns for future filtering purposes.
+
+```{r}
+glimpse(dailytemp)
+```
+
+```{r}
+duplicate <- dailytemp %>% 
+  group_by_all() %>% 
+  filter(n()>1) %>% 
+  ungroup()
+  
+duplicate
+```
+
+```{r}
+dailytemp[rowSums(is.na(dailytemp)) > 0, ] %>% 
+  kable() %>% 
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                            fixed_thead = T)
+```
+
+```{r}
+
+dailytemp <- dailytemp %>% 
+  filter(
+    !if_all(
+      c(mean_temperature_c, 
+      maximum_temperature_c,
+      minimum_temperature_c), 
+    is.na))
+```
+
+# **4 Exploratory Data Analysis**
+
+```{r}
+# Computing summary statistics of mean, median and lower and upper whiskers in boxplot
+meantemp <- round(mean(dailytemp$mean_temperature_c, na.rm = TRUE), digits=1)
+mediantemp <- round(median(dailytemp$mean_temperature_c, na.rm=TRUE), digits=1)
+mintemp <- round(min(dailytemp$mean_temperature_c, na.rm=TRUE), digits=1)
+maxtemp <- round(max(dailytemp$mean_temperature_c, na.rm=TRUE), digits=1)
+leftwhisk_temp <- round(quantile(dailytemp$mean_temperature_c, probs = .25, na.rm=TRUE)-1.5*IQR(dailytemp$mean_temperature_c, na.rm=TRUE),1)
+
+
+# Axis Styles
+ax_h <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = TRUE,
+  showgrid = FALSE
+)
+
+aax_b <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE,
+  showgrid = FALSE
+)
+
+# Plot Histogram
+histog <- 
+  plot_ly(dailytemp,
+                color = I("#c7c8cc")) %>% 
+  group_by(station) %>% 
+  add_histogram(x = ~ mean_temperature_c,
+                histnorm = "count",
+                hoverlabel = list(
+                  bgcolor = "black",
+                  bordercolor = "#f5f5f5"),
+                hovertemplate=paste('Temp: %{x}°C<br>',
+                                    'Frequency: %{y}<extra></extra>')
+                ) %>% 
+  # Add mean line 
+  add_lines(y = c(0,70),
+            x = meantemp,
+            line = list(
+              color = "#e0218a",
+              width = 3
+              #dash = 'dash'
+              ),
+            inherit = FALSE,
+            showlegend = FALSE
+  ) %>% 
+  # Add annotation for mean line
+  add_annotations(text = paste0("Mean: ", meantemp, "°C"),
+                  x = 27.4,
+                  y = 73,
+                  showarrow = FALSE,
+                  font = list(color = "#e0218a",
+                              size = 14)
+                  ) %>% 
+  layout(
+         xaxis = list(title = "Temperature (°C)",   
+                      showticklabels = TRUE),
+         yaxis = ax_h,
+         plot_bgcolor = "#f5f5f5",
+         paper_bgcolor = "#f5f5f5",
+         bargap = 0.1
+         #barmode = "overlay"
+         )
+
+
+# Plot Boxplot
+boxp <- plot_ly(dailytemp,
+                x = ~ mean_temperature_c,
+                color = I("#c7c8cc"),
+                type = "box",
+                fillcolor = "",
+                line = list(color = "gray",
+                          width = 1.5),
+                hoverlabel = list(
+                  bgcolor = "black",
+                  bordercolor = "#f5f5f5"
+                ),
+                 marker = list(color = 'rgb(8,81,156)',
+                            outliercolor = 'rgba(219, 64, 82, 0.6)',
+                            line = list(outliercolor = 'rgba(219, 64, 82, 1.0)',
+                                        outlierwidth = 2))
+                ) %>% 
+  layout(xaxis = aax_b,
+         yaxis = aax_b)
+
+subplot(boxp, histog, 
+              nrows = 2,
+              heights = c(0.2, 0.8),
+              #widths = c(0.8, 0.2),
+              shareX = TRUE) %>% 
+  layout(showlegend = FALSE,
+         title = "<b>Uneven distribution of daily mean temperatures</b>",
+         xaxis = list(range = c(19, 36))
+  )
+```
+
+**Insight:**
+
+1.  **Central Tendency**: The mean (average) daily temperature is marked at 28°C, which suggests that on average, the temperature in Singapore is quite warm.
+
+2.  **Temperature Range**: The boxplot shows the range of temperatures, with the ends of the whiskers representing the minimum and maximum values that are not outliers. The edges of the box represent the first (Q1) and third (Q3) quartiles, and the line inside the box is the median. The range between Q1 and Q3 is known as the interquartile range (IQR), and it represents the middle 50% of the data.
+
+3.  **Distribution Shape**: The histogram bars indicate the frequency of the temperature readings. The taller bars suggest that temperatures around the median are more common. If the bars form a bell-shaped curve, the distribution is normal; however, in this graph, the distribution seems to be slightly left-skewed since there are more bars to the right of the mean than to the left, indicating that higher temperatures are more common than lower ones.
+
+4.  **Outliers**: If there were any dots beyond the whiskers of the boxplot, they would indicate outliers. The absence of such dots suggests there are no extreme values that are significantly different from the rest of the data.
+
+5.  **Climate Characterization**: Given that the average temperature is 28°C, and considering Singapore's geographic location near the equator, this graph supports the understanding that Singapore has a tropical climate with warm temperatures throughout the year.
+
+This visualization can help with various applications such as planning for energy usage, informing tourists about what weather to expect, and understanding climate patterns for agricultural activities.
+
+### **4.2 differences in mean temperatures across locations, seasons, and time**
+
+```{r}
+# Initiate base plot
+plot_ly(data = dailytemp,
+        x = ~ station,
+        y = ~mean_temperature_c,
+        #hoveron = "points+kde",
+        line = list(width=1),
+        type = "violin",
+        spanmode = 'hard',
+        marker = list(opacity = 0.5,
+                      line = list(width = 2)),
+        box = list(visible = T),
+        points = 'all',
+        scalemode = 'count',
+        meanline = list(visible = T,
+                        color = "red"),
+        color = I('#caced8'),
+        marker = list(
+          line = list(
+            width = 2,
+            color = '#caced8'
+          ),
+          symbol = 'line-ns'
+        )
+        ) %>% 
+
+# Cosmetic edits  
+  layout(title = "<b>Mean Temperatures across locations, seasons, and over time.</b>",
+         xaxis = list(title = "", 
+                      autotypenumbers='strict'),
+         yaxis = list(title = "Temperature (°C)"),
+         plot_bgcolor = "#f5f5f5",
+         paper_bgcolor = "#f5f5f5",
+
+# Dropdown menu options                  
+         updatemenus = list(list(type = 'dropdown',
+                                 xref = "paper",
+                                 yref = "paper",
+                                 xanchor = "left",
+                                 x = 0.84, 
+                                 y = 1.0,
+                                 buttons = list(
+                                   list(method = "update",
+                                        args = list(list(x = list(dailytemp$station)),
+                                                    list(xaxis = list(categoryorder = "category ascending"))),
+                                        label = "Urban/Rural"),
+                                   list(method = "update",
+                                        args = list(list(x = list(dailytemp$month)),
+                                                    list(xaxis = list(categoryorder = "category descending"))),
+                                        label = "Season"),
+                                   list(method = "update",
+                                        args = list(list(x = list(dailytemp$year)),
+                                                    list(xaxis = list(categoryorder = "category ascending"))),
+                                        label = "Year")
+                              
+                                   )
+                                 )
+                            )
+         )         
+```
+
+**Insight:**
+
+the mean temperatures at Changi are relatively stable, hovering around a median that's just below 28°C, with few fluctuations into higher or lower extremes. This aligns with the known climate characteristics of Singapore, which is generally warm and humid throughout the year with little variation in mean temperatures.
+
+### **4.3 Segment our data to focus on the average temperature**
+
+-   To analyse monthly maximum, minimum, and mean temperatures over the years, we need to group daily temperature data by station and month/year using `group_by()`.
+
+```{r}
+monthlytemp <- dailytemp %>% 
+  na.omit() %>% 
+  group_by(station, month, year) %>% 
+  summarise(n = n(),
+            mean = mean(mean_temperature_c),
+            max = max(maximum_temperature_c), # identify max value for each month per station
+            min = min(minimum_temperature_c), # identify min value for each month per station
+            sd = sd(minimum_temperature_c)) %>% # calculate standard deviation for each month per station
+  mutate(
+         se = sd/sqrt(n-1), # calculate standard error of mean
+               avg_upper = mean+(1.96*se),  # calculate 95% CI for mean
+               avg_lower = mean-(1.96*se),
+         range = max - min,
+         yrmth = as.factor(paste0(month, " ", year))) %>%  # calculate 95% CI for mean
+  ungroup() 
+
+monthlytemp$yrmth <- factor(monthlytemp$yrmth, levels = c("Jun 1983", "Dec 1983", 
+                                                          "Jun 1993", "Dec 1993",
+                                                          "Jun 2003", "Dec 2003", 
+                                                          "Jun 2013", "Dec 2013", 
+                                                          "Jun 2023", "Dec 2023"))
+```
+
+```{r}
+# Customise tooltip information
+monthlytemp$tooltip2 <- paste0("Station: ", monthlytemp$station,
+                               "\nPeriod: ", monthlytemp$yrmth,                                 
+                               "\nDays Recorded: ", monthlytemp$n,
+                               "\nMean Temp (with standard error): ",  round(monthlytemp$mean, 1), "°", 
+                               "+/-",  round(monthlytemp$se,1) ,"°",
+                               "\nMin Temp: ", monthlytemp$min, "°",
+                               "\nMax Temp: ", monthlytemp$max, "°",
+                               "\nRange: ", monthlytemp$range, "°")
+
+# Style tooltip
+tooltip_css <- "background-color:black; font-style:bold; color:#f5f5f5;" 
+
+tuftedec <- 
+  ggplot(monthlytemp[monthlytemp$month=="Jul",]) +
+
+# Plot min to max temp
+  geom_ribbon(
+    aes(x = yrmth,
+        ymin = min,
+        ymax = max,
+        group = 1),
+    alpha = 0.4,
+    fill="#caced8") +
+  
+# Plot 95% confidence interval
+  geom_ribbon(
+    aes(x = yrmth,
+        ymin = avg_lower,
+        ymax = avg_upper,
+        group = 1),
+    alpha = 0.5,
+    fill="#d6ac5e") +  
+
+# Plot mean temp    
+  geom_line(
+    aes(
+    x = yrmth,
+    y = mean,
+    group = 1),
+    color = "black",
+    size = 0.8
+  ) +
+  geom_point_interactive(
+    aes(x = yrmth,
+        y= mean,
+        tooltip=tooltip2),
+    size=1.2)+
+  
+  facet_wrap(~station,
+             ncol = 1) +
+  
+  scale_y_continuous(limits = c(20, 37.5),
+                     breaks = seq(20,40, by=5), 
+                     labels = ~ paste0(.x, "°")) +
+  theme(
+    plot.title = element_text(face= 'bold'),
+    panel.grid.major = element_line(colour = "white", linetype = 1, linewidth = 0.5),
+    panel.grid.minor = element_line(colour = "white", linetype = 1, linewidth = 0.5),
+    panel.grid.major.x = element_line(color = "wheat4",linetype=3, size=0.5),
+    plot.background = element_rect(fill="#f5f5f5",colour="#f5f5f5"),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    strip.text = element_text(face= 'bold'),
+    strip.background = element_rect(color="#f5f5f5", fill="#f5f5f5")
+  )
+
+pw <- tuftedec +
+  plot_annotation(title = "Uncertainty of point estimates",
+                  theme=theme(plot.title = element_text(hjust = 0, face="bold"),
+                              plot.background = element_rect(fill="#f5f5f5", colour = "#f5f5f5"),
+                              panel.border = element_blank()))
+
+girafe(ggobj = pw,
+       options = list(opts_tooltip(css = tooltip_css),
+                      opts_hover(css="fill: #fe0569;"),
+                      opts_zoom(max=5),
+                      hover_nearest = TRUE
+       ))
+
+```
+
+## **4.4 How much hotter or colder**
+
+**Data Prep**
+
+-   The code chunk below filters the *dailytemp* dataframe to include only Changi data, arranges the data by date via `arrange()`, and then calculates the change in mean temperature from one day to the next using the `lag()` function.
+
+-   The variable *pos* identifies whether the change is an increase and decrease in order to assign a colour when plotting the bar chart.
+
+```{r}
+change_changi <- dailytemp %>% 
+  filter(station == "Changi") %>% 
+  arrange(date) %>% 
+  mutate(change = mean_temperature_c - lag(mean_temperature_c),
+         pos = change >=0 ) 
+```
+
+```{r}
+# Tooltip style
+tooltip_css <- "background-color:black; font-style:bold; color:#f5f5f5;" 
+
+change <- 
+  ggplot(change_changi[change_changi$month=="Jul",], 
+       aes(x = day,
+           y = change, 
+           fill = pos,
+           data_id = date,
+           tooltip = paste("Station: ", station, "<br>",
+                        "Date: ", date, "<br>",
+                        "Mean temp: ", mean_temperature_c, "°C", "<br>",
+                        "Change: ", round(change,1), "°C"))) +
+  geom_col_interactive(position = "identity",
+           colour = "#f5f5f5",
+           size = 0.25,
+           hover_nearest= TRUE
+           ) +
+  scale_fill_manual(
+                    values = c("#3f7cb8", "#bf3836"), 
+                    guide = FALSE) +
+  facet_wrap(~ year, ncol = 1, strip.position="right") +
+  scale_y_continuous(breaks = seq(-2,2, by = 2),
+                     labels = ~ paste0(.x, "°"))+
+  scale_x_continuous(breaks = seq(1,31, by = 5))+
+   labs(title ="Day-on-Day Change",
+    x = "Day in  July",
+    y = NULL
+  ) +
+  theme(
+  strip.text.y = element_blank(),
+  plot.title = element_text(face = "bold", size = 10, hjust = 0.5),
+  axis.title.x = element_text(size = 8),
+  axis.title.y = element_text(hjust=1, angle=0, size = 8),
+  axis.ticks.x = element_blank(),
+  axis.text = element_text(size = 6),
+  plot.background = element_rect(fill = "#f5f5f5", color = "#f5f5f5"),
+  panel.background = element_rect(fill = "#f5f5f5", color = "grey60"),
+  panel.grid.major = element_blank(), 
+  panel.grid.minor = element_blank()
+  )
+
+
+# Tile Plot as Heatmap
+hm <-
+  ggplot(
+    change_changi[change_changi$month=="Jul",],
+    aes(x = day, 
+        y = year) # Reverse order to align with bar plot
+  ) +
+  
+  # Interactive tile plots
+  geom_tile_interactive(
+    aes(fill = mean_temperature_c,
+        data_id = date,
+        tooltip = paste("Station: ", station, "<br>",
+                        "Date: ", date, "<br>",
+                        "Mean temp: ", mean_temperature_c, "°C", "<br>",
+                        "Change: ", round(change,1), "°C")))+
+  
+  # Specify gradient colors for divergent scale 
+  scale_fill_gradient(
+    low = "white",
+    high = "#bf3836",
+    space = "Lab",
+    na.value = "grey50",
+    aesthetics = "fill",
+    guide = guide_colorbar(
+    title = "Temp (°C)", 
+    title.position = "left", 
+    title.vjust = 1,
+    barheight = 1,
+    barwidth = 5)
+  ) +  
+ labs(
+    title="Daily Mean Temperature",
+    x = "Day in July",
+    y = NULL
+  ) +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    #axis.line.x = element_blank(),
+    panel.grid.major = element_blank(),
+    plot.title = element_text(face = "bold", size = 10, hjust = 0.5),
+    axis.title.x = element_text(size = 8),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.title.y = element_text(hjust=1, angle=0, size = 10, ),
+    axis.text.y = element_text(size = 8, face = "bold"),
+    axis.text.x = element_text(size = 6),
+    plot.background = element_rect(fill="#f5f5f5",colour="#f5f5f5"),
+    panel.background = element_rect(fill="#f5f5f5",colour="#f5f5f5"),
+    legend.title = element_text(size = 6, face = "bold"),
+    legend.text = element_text(size = 6),
+    legend.background = element_rect(fill="#f5f5f5",colour="#f5f5f5")
+    )+ 
+  scale_y_discrete(position = "right",
+                   limits = rev)+
+  scale_x_continuous(breaks = seq(1,31, by = 5))
+
+
+
+# Combine both barplot and heatmap to form a coordinated-linked visualisation
+ggiraph::girafe(code = print(hm + change),
+                width_svg = 6,
+                height_svg = 6*0.7,
+                options = list(opts_tooltip(css = tooltip_css),
+                               opts_hover("stroke: black;"),
+                               opts_zoom(min = 1, max = 3)))               
+```
+
+**Insight:**
+
+This visualization uses shades of red to represent daily mean temperatures for each day in July over selected years (1983, 1993, 2003, 2013, and 2023). Darker shades of red indicate higher temperatures, while lighter shades represent lower temperatures. A marked area with a black border in the 1983 row seems to highlight a particular range of days, possibly indicating an unusual temperature pattern or an event of interest.
+
+On the right, there's a series of mini bar charts titled "Day-on-Day Change", which show the change in temperature from one day to the next for the same years and month as the heat map. Positive changes are shown in blue, indicating that the temperature increased from the previous day, while negative changes are in red, indicating a decrease from the previous day. The dashed horizontal line at zero would be the baseline where no change occurred between days.
+
+Together, these charts provide a detailed look at the temperature patterns for July across different years, highlighting both the overall temperature and the variability from day to day. This could be useful for analyzing trends over time, such as the effects of climate change or for planning purposes in sectors sensitive to temperature fluctuations like agriculture or energy.
+
+## **4.5 Temperature**
+
+In this section, we investigate the occurrence of extreme heat by identifying "very warm days," defined as days when the daily maximum temperature exceeds 34°C by the MSS.
+
+```{r}
+warmdays <- dailytemp %>% 
+  mutate(warmday = ifelse(maximum_temperature_c >= 34, 1, 0)) %>% 
+  group_by(station, year, month) %>% 
+  summarise(
+    totaldays = n(),
+    wdays = sum(warmday == 1),
+    pct_warmdays = (sum(warmday)/n())*100) %>% 
+  mutate(desc = paste0(station, " in ", month, " ", year)) %>% 
+  filter(pct_warmdays != 0)
+```

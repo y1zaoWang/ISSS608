@@ -133,10 +133,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Hands-on Exercise 3</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands_on_Ex3_2.html" rel="" target="">
- <span class="dropdown-text">Hands-on Exercise 3 PASG</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./Hands_on_Ex4.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 4</span></a>
   </li>  
@@ -147,6 +143,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./Hands_on_Ex4_VU.html" rel="" target="">
  <span class="dropdown-text">Hands-on Exercise 4 VU</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex4_FPFFC.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 4 FPFFC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex5_CTP.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 CTP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex5_VCA.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 VCA</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex5_HVAMD.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 HVAMD</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex5_VMAPCP.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 VMAPCP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex5_TV.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 5 TV</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex6.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex9.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Hands_on_Ex10.html" rel="" target="">
+ <span class="dropdown-text">Hands-on Exercise 10</span></a>
   </li>  
     </ul>
   </li>
@@ -177,6 +209,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./Take_home_Ex2.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Take_home_Ex3.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Take_home_Ex4.html" rel="" target="">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
   </li>  
     </ul>
   </li>
@@ -359,6 +399,12 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"np"</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(x): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(x): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -369,17 +415,23 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="oneway-anova-test-ggbetweenstats-method"><strong>10.3.7 Oneway ANOVA Test: <em>ggbetweenstats()</em> method</strong></h3>
 <p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html"><em>ggbetweenstats()</em></a> is used to build a visual for One-way ANOVA test on English score by race.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> exam,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> RACE, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ENGLISH,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"p"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean.ci =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.comparisons =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"s"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> exam,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> RACE, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ENGLISH,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"p"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean.ci =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.comparisons =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"s"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(x): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(x): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -397,12 +449,12 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="significant-test-of-correlation-ggscatterstats"><strong>10.3.8 Significant Test of Correlation: <em>ggscatterstats()</em></strong></h3>
 <p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggscatterstats.html"><em>ggscatterstats()</em></a> is used to build a visual for Significant Test of Correlation between Maths scores and English scores.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatterstats</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> exam,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> MATHS,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ENGLISH,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">marginal =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatterstats</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> exam,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> MATHS,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ENGLISH,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">marginal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -412,17 +464,17 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="significant-test-of-association-depedence-ggbarstats-methods"><strong>10.3.9 Significant Test of Association (Depedence) : <em>ggbarstats()</em> methods</strong></h3>
 <p>In the code chunk below, the Maths scores is binned into a 4-class variable by using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut"><em>cut()</em></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>exam1 <span class="ot">&lt;-</span> exam <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MATHS_bins =</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">cut</span>(MATHS, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>,<span class="dv">75</span>,<span class="dv">85</span>,<span class="dv">100</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>exam1 <span class="ot">&lt;-</span> exam <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MATHS_bins =</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">cut</span>(MATHS, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>,<span class="dv">75</span>,<span class="dv">85</span>,<span class="dv">100</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this code chunk below&nbsp;<a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbarstats.html"><em>ggbarstats()</em></a>&nbsp;is used to build a visual for Significant Test of Association</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbarstats</span>(exam1, </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> MATHS_bins, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> GENDER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbarstats</span>(exam1, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> MATHS_bins, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> GENDER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -442,15 +494,15 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <section id="installing-and-loading-the-required-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="installing-and-loading-the-required-libraries"><strong>10.6 Installing and loading the required libraries</strong></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readxl, performance, parameters, see)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readxl, performance, parameters, see)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="importing-excel-file-readxl-methods" class="level3">
 <h3 class="anchored" data-anchor-id="importing-excel-file-readxl-methods"><strong>10.6.1 Importing Excel file: readxl methods</strong></h3>
 <p>In the code chunk below, <a href="https://readxl.tidyverse.org/reference/read_excel.html"><em>read_xls()</em></a> of <a href="https://readxl.tidyverse.org/"><strong>readxl</strong></a> package is used to import the data worksheet of <code>ToyotaCorolla.xls</code> workbook into R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>car_resale <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="st">"chap04/data/ToyotaCorolla.xls"</span>, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"data"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>car_resale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>car_resale <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="st">"chap04/data/ToyotaCorolla.xls"</span>, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"data"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>car_resale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,436 × 38
       Id Model    Price Age_08_04 Mfg_Month Mfg_Year     KM Quarterly_Tax Weight
@@ -480,9 +532,9 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="multiple-regression-model-using-lm"><strong>10.6.2 Multiple Regression Model using lm()</strong></h3>
 <p>The code chunk below is used to calibrate a multiple linear regression model by using <em>lm()</em> of Base Stats of R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Price <span class="sc">~</span> Age_08_04 <span class="sc">+</span> Mfg_Year <span class="sc">+</span> KM <span class="sc">+</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>              Weight <span class="sc">+</span> Guarantee_Period, <span class="at">data =</span> car_resale)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Price <span class="sc">~</span> Age_08_04 <span class="sc">+</span> Mfg_Year <span class="sc">+</span> KM <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>              Weight <span class="sc">+</span> Guarantee_Period, <span class="at">data =</span> car_resale)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -501,7 +553,7 @@ Coefficients:
 <h3 class="anchored" data-anchor-id="model-diagnostic-checking-for-multicolinearity"><strong>10.6.3 Model Diagnostic: checking for multicolinearity:</strong></h3>
 <p>In the code chunk, <a href="https://easystats.github.io/performance/reference/check_collinearity.html"><em>check_collinearity()</em></a> of <a href="https://easystats.github.io/performance/"><strong>performance</strong></a> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Check for Multicollinearity
 
@@ -520,8 +572,8 @@ High Correlation
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>check_c <span class="ot">&lt;-</span> <span class="fu">check_collinearity</span>(model)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>check_c <span class="ot">&lt;-</span> <span class="fu">check_collinearity</span>(model)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Variable `Component` is not in your data frame :/</code></pre>
 </div>
@@ -534,14 +586,14 @@ High Correlation
 <h3 class="anchored" data-anchor-id="model-diagnostic-checking-normality-assumption"><strong>10.6.4 Model Diagnostic: checking normality assumption</strong></h3>
 <p>In the code chunk, <a href="https://easystats.github.io/performance/reference/check_normality.html"><em>check_normality()</em></a> of <a href="https://easystats.github.io/performance/"><strong>performance</strong></a> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Price <span class="sc">~</span> Age_08_04 <span class="sc">+</span> KM <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>              Weight <span class="sc">+</span> Guarantee_Period, <span class="at">data =</span> car_resale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Price <span class="sc">~</span> Age_08_04 <span class="sc">+</span> KM <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>              Weight <span class="sc">+</span> Guarantee_Period, <span class="at">data =</span> car_resale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>check_n <span class="ot">&lt;-</span> <span class="fu">check_normality</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>check_n <span class="ot">&lt;-</span> <span class="fu">check_normality</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -551,10 +603,10 @@ High Correlation
 <h3 class="anchored" data-anchor-id="model-diagnostic-check-model-for-homogeneity-of-variances"><strong>10.6.5 Model Diagnostic: Check model for homogeneity of variances</strong></h3>
 <p>In the code chunk, <a href="https://easystats.github.io/performance/reference/check_heteroscedasticity.html"><em>check_heteroscedasticity()</em></a> of <a href="https://easystats.github.io/performance/"><strong>performance</strong></a> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>check_h <span class="ot">&lt;-</span> <span class="fu">check_heteroscedasticity</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>check_h <span class="ot">&lt;-</span> <span class="fu">check_heteroscedasticity</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_h)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_h)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -564,7 +616,7 @@ High Correlation
 <h3 class="anchored" data-anchor-id="model-diagnostic-complete-check"><strong>10.6.6 Model Diagnostic: Complete check</strong></h3>
 <p>We can also perform the complete by using <a href="https://easystats.github.io/performance/reference/check_model.html"><em>check_model()</em></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -574,7 +626,7 @@ High Correlation
 <h3 class="anchored" data-anchor-id="visualising-regression-parameters-see-methods"><strong>10.6.7 Visualising Regression Parameters: see methods</strong></h3>
 <p>In the code below, plot() of see package and parameters() of parameters package is used to visualise the parameters of a regression model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">parameters</span>(model1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">parameters</span>(model1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -584,8 +636,8 @@ High Correlation
 <h3 class="anchored" data-anchor-id="visualising-regression-parameters-ggcoefstats-methods"><strong>10.6.8 Visualising Regression Parameters: <em>ggcoefstats()</em> methods</strong></h3>
 <p>In the code below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggcoefstats.html"><em>ggcoefstats()</em></a> of ggstatsplot package to visualise the parameters of a regression model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(model1, </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">output =</span> <span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(model1, </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">output =</span> <span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_Ex4_VSA_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
