@@ -52,7 +52,7 @@ website:
           - text: Take-home Exercise 3
             href: Take_home_Ex3.html
           - text: Take-home Exercise 4
-            href: Take_home_Ex4.html
+            href: THE4/Take-home_ex4.html
     right:
       - href: index.qmd
         text: Home
